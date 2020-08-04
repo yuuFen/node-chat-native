@@ -11,7 +11,7 @@ import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 
 import {Provider, connect} from 'react-redux';
-import {AppNavigator} from './src/pages/Home';
+import AppNavigator from './src/pages';
 import store from './src/store';
 
 const AppChild = connect((state) => ({theme: state.theme}))((props) => {
@@ -25,7 +25,7 @@ const AppChild = connect((state) => ({theme: state.theme}))((props) => {
   );
 });
 
-export default () => (
+export default App = () => (
   <Provider store={store}>
     <AppChild />
   </Provider>

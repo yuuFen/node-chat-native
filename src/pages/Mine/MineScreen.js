@@ -3,25 +3,21 @@ import {SafeAreaView} from 'react-native';
 import {Button, Divider, Layout, TopNavigation} from '@ui-kitten/components';
 
 import {connect} from 'react-redux';
-import {changeTheme} from '../../actions/themeAction';
 
-const HomeScreen = ({navigation, changeTheme}) => {
+const MineScreen = ({navigation}) => {
   const navigateDetails = () => {
     navigation.navigate('Details');
   };
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <TopNavigation title="首页" alignment="center" />
+      <TopNavigation title="我的" alignment="center" />
       <Divider />
       <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Button onPress={navigateDetails}>OPEN DETAILS</Button>
-        <Button style={{marginVertical: 4}} onPress={changeTheme}>
-          TOGGLE THEME
-        </Button>
       </Layout>
     </SafeAreaView>
   );
 };
 
-export default connect(() => ({}), {changeTheme})(HomeScreen);
+export default connect(() => ({}), {})(MineScreen);
