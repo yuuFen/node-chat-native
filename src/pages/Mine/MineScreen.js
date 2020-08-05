@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 
 const MineScreen = ({navigation}) => {
   const navigateDetails = () => {
-    navigation.navigate('Details');
+    navigation.navigate('MineDetails');
   };
 
   return (

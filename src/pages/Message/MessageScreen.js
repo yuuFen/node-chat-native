@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 
 const MessageScreen = ({navigation}) => {
   const navigateDetails = () => {
-    navigation.navigate('Details');
+    navigation.navigate('MessageDetails');
   };
 
   return (

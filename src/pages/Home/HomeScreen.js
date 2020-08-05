@@ -7,7 +7,7 @@ import {changeTheme} from '../../actions/themeAction';
 
 const HomeScreen = ({navigation, changeTheme}) => {
   const navigateDetails = () => {
-    navigation.navigate('Details');
+    navigation.navigate('HomeDetails');
   };
 
   return (

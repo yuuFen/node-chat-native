@@ -1,47 +1,26 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import TabbarShowcase from './TabbarShowcase';
 
-import {
-  Icon,
-  BottomNavigation,
-  BottomNavigationTab,
-} from '@ui-kitten/components';
+import HomeScreen from './Home/HomeScreen';
+import MessageScreen from './Message/MessageScreen';
+import MineScreen from './Mine/MineScreen';
+import HomeDetailsScreen from './Home/DetailsScreen';
+import MessageDetailsScreen from './Message/DetailsScreen';
+import MineDetailsScreen from './Mine/DetailsScreen';
 
-import HomeNavigator from './Home';
-import MessageNavigator from './Message';
-import MineNavigator from './Mine';
 import Welcome from './Welcome';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const PersonIcon = (props) => <Icon {...props} name="person-outline" />;
-const BellIcon = (props) => <Icon {...props} name="bell-outline" />;
-const EmailIcon = (props) => <Icon {...props} name="email-outline" />;
-
-const BottomNavigationAccessoriesShowcase = ({navigation, state}) => {
-  return (
-    <BottomNavigation
-      style={styles.bottomNavigation}
-      selectedIndex={state.index}
-      onSelect={(index) => navigation.navigate(state.routeNames[index])}>
-      {/* <BottomNavigationTab title="USERS" icon={PersonIcon} /> */}
-      <BottomNavigationTab icon={BellIcon} />
-      <BottomNavigationTab icon={EmailIcon} />
-      <BottomNavigationTab icon={PersonIcon} />
-    </BottomNavigation>
-  );
-};
-
 const TabNavigator = () => (
-  <Tab.Navigator
-    tabBar={(props) => <BottomNavigationAccessoriesShowcase {...props} />}>
-    <Tab.Screen name="Home" component={HomeNavigator} />
-    <Tab.Screen name="Message" component={MessageNavigator} />
-    <Tab.Screen name="Mine" component={MineNavigator} />
+  <Tab.Navigator tabBar={(props) => <TabbarShowcase {...props} />}>
+    <Tab.Screen name="Home" component={HomeScreen} />
+    <Tab.Screen name="Message" component={MessageScreen} />
+    <Tab.Screen name="Mine" component={MineScreen} />
   </Tab.Navigator>
 );
 
@@ -64,21 +43,38 @@ export default AppNavigator = () => {
             }}
           />
         ) : (
-          <Stack.Screen
-            name="Message"
-            component={TabNavigator}
-            options={{
-              headerShown: false,
-            }}
-          />
+          <>
+            <Stack.Screen
+              name="Message"
+              component={TabNavigator}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="HomeDetails"
+              component={HomeDetailsScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="MessageDetails"
+              component={MessageDetailsScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="MineDetails"
+              component={MineDetailsScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  bottomNavigation: {
-    marginVertical: 8,
-  },
-});
