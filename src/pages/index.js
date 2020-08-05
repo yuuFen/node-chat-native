@@ -9,7 +9,7 @@ import MessageScreen from './Message/MessageScreen';
 import MineScreen from './Mine/MineScreen';
 import HomeDetailsScreen from './Home/DetailsScreen';
 import MessageDetailsScreen from './Message/DetailsScreen';
-import MineDetailsScreen from './Mine/DetailsScreen';
+import UserinfoScreen from './Mine/UserinfoScreen';
 
 import Welcome from './Welcome';
 
@@ -66,8 +66,8 @@ export default AppNavigator = () => {
               }}
             />
             <Stack.Screen
-              name="MineDetails"
-              component={MineDetailsScreen}
+              name="Userinfo"
+              component={UserinfoScreen}
               options={{
                 headerShown: false,
               }}

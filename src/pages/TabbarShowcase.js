@@ -14,7 +14,7 @@ const EmailIcon = (props) => <Icon {...props} name="email-outline" />;
 export default TabbarShowcase = ({navigation, state}) => {
   return (
     <BottomNavigation
-      style={styles.bottomNavigation}
+      // style={styles.bottomNavigation}
       selectedIndex={state.index}
       onSelect={(index) => navigation.navigate(state.routeNames[index])}>
       {/* <BottomNavigationTab title="USERS" icon={PersonIcon} /> */}
@@ -25,8 +25,8 @@ export default TabbarShowcase = ({navigation, state}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  bottomNavigation: {
-    marginVertical: 8,
-  },
-});
+// const styles = StyleSheet.create({
+//   bottomNavigation: {
+//     marginVertical: 8,
+//   },
+// });
