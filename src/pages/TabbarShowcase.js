@@ -1,15 +1,8 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 
-import {
-  Icon,
-  BottomNavigation,
-  BottomNavigationTab,
-} from '@ui-kitten/components';
-
-const PersonIcon = (props) => <Icon {...props} name="person-outline" />;
-const BellIcon = (props) => <Icon {...props} name="bell-outline" />;
-const EmailIcon = (props) => <Icon {...props} name="email-outline" />;
+import {Icon, BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
+import {BellIcon, MessageIcon, PersonIcon, MoreIcon} from '../components/Icons';
 
 export default TabbarShowcase = ({navigation, state}) => {
   return (
@@ -17,10 +10,10 @@ export default TabbarShowcase = ({navigation, state}) => {
       // style={styles.bottomNavigation}
       selectedIndex={state.index}
       onSelect={(index) => navigation.navigate(state.routeNames[index])}>
-      {/* <BottomNavigationTab title="USERS" icon={PersonIcon} /> */}
-      <BottomNavigationTab icon={BellIcon} />
-      <BottomNavigationTab icon={EmailIcon} />
-      <BottomNavigationTab icon={PersonIcon} />
+      <BottomNavigationTab title="广场" icon={BellIcon} />
+      <BottomNavigationTab title="发现" icon={MoreIcon} />
+      <BottomNavigationTab title="消息" icon={MessageIcon} />
+      <BottomNavigationTab title="我的" icon={PersonIcon} />
     </BottomNavigation>
   );
 };

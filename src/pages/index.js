@@ -5,8 +5,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import TabbarShowcase from './TabbarShowcase';
 
 import HomeScreen from './Home/HomeScreen';
+import MoreScreen from './More/MoreScreen';
 import MessageScreen from './Message/MessageScreen';
 import MineScreen from './Mine/MineScreen';
+
 import HomeDetailsScreen from './Home/DetailsScreen';
 import MessageDetailsScreen from './Message/DetailsScreen';
 import UserinfoScreen from './Mine/UserinfoScreen';
@@ -19,6 +21,7 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => (
   <Tab.Navigator tabBar={(props) => <TabbarShowcase {...props} />}>
     <Tab.Screen name="Home" component={HomeScreen} />
+    <Tab.Screen name="More" component={MoreScreen} />
     <Tab.Screen name="Message" component={MessageScreen} />
     <Tab.Screen name="Mine" component={MineScreen} />
   </Tab.Navigator>
