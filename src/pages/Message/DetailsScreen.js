@@ -23,13 +23,13 @@ export default ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <TopNavigation
-        title="个人资料"
+        title="详情"
         alignment="center"
         accessoryLeft={BackAction}
       />
       <Divider />
       <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text category="h1">MINE DETAILS</Text>
+        <Text category="h1">MSG DETAILS</Text>
       </Layout>
     </SafeAreaView>
   );

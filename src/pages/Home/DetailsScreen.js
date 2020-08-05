@@ -29,7 +29,7 @@ export default ({navigation}) => {
       />
       <Divider />
       <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text category="h1">DETAILS</Text>
+        <Text category="h1">HOME DETAILS</Text>
       </Layout>
     </SafeAreaView>
   );

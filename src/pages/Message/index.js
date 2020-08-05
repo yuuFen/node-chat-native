@@ -1,13 +1,13 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import DetailsScreen from './DetailsScreen';
-import MineScreen from './MineScreen';
+import MessageScreen from './MessageScreen';
 
 const {Navigator, Screen} = createStackNavigator();
 
-export default MineNavigator = () => (
+export default MessageNavigator = () => (
   <Navigator headerMode="none">
-    <Screen name="Main" component={MineScreen} />
+    <Screen name="Main" component={MessageScreen} />
     <Screen name="Details" component={DetailsScreen} />
   </Navigator>
 );
