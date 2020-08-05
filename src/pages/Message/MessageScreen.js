@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import {Divider, Button, Layout, MenuItem, OverflowMenu, TopNavigation, TopNavigationAction, Input, ButtonGroup} from '@ui-kitten/components';
+import {Divider, Text, Button, Layout, MenuItem, OverflowMenu, TopNavigation, TopNavigationAction, Input, ButtonGroup} from '@ui-kitten/components';
 import {SettingIcon, EditIcon, MessageIcon, SetIcon, CameraIcon, SearchIcon, AtIcon, LoveIcon, PersonAddIcon} from '../../components/Icons';
 import globalStyles from '../../constants/globalStyles';
 
@@ -31,7 +31,7 @@ export default MessageScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <TopNavigation alignment="center" title="聊天" accessoryLeft={renderLeftAction} accessoryRight={renderRightActions} />
+      <TopNavigation alignment="center" title={() => <Text category="h5">聊天</Text>} accessoryLeft={renderLeftAction} accessoryRight={renderRightActions} />
       <Divider />
       <Layout
         style={{

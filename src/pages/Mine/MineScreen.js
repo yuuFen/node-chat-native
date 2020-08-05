@@ -19,7 +19,7 @@ import mockThreads from './data';
 const mockUserinfo = {
   id: 1001,
   avatar_normal: 'https://jdc.jd.com/img/100',
-  nick: '闪亮之裤',
+  username: '闪亮之裤',
   sex: 1,
   creations: 12,
   loves: 64,

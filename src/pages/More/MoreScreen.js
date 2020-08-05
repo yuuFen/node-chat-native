@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
-import {Button, Divider, Layout, TopNavigation, TopNavigationAction} from '@ui-kitten/components';
+import {Button, Divider, Layout, TopNavigation, Text} from '@ui-kitten/components';
 
 import {connect} from 'react-redux';
 import {changeTheme} from '../../actions/themeAction';
@@ -14,7 +14,7 @@ const More = ({navigation, changeTheme, theme: {theme}}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <TopNavigation alignment="center" title="发现" />
+      <TopNavigation alignment="center" title={() => <Text category="h5">发现</Text>} />
       <Divider />
       <Layout
         style={{
