@@ -1,11 +1,12 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
-import {Button, Divider, Layout, TopNavigation, TopNavigationAction, TabView, Tab, Text, TabBar, useTheme} from '@ui-kitten/components';
+import {Button, Divider, Layout, TopNavigation, TopNavigationAction, ViewPager, Text, useTheme} from '@ui-kitten/components';
 
 import {connect} from 'react-redux';
 import {changeTheme} from '../../actions/themeAction';
 import globalStyles from '../../constants/globalStyles';
 import {MoonIcon, SunIcon} from '../../components/Icons';
+import TopTabs from '../../components/TopTabs';
 
 const HomeScreen = ({navigation, changeTheme, theme: {theme}}) => {
   const themeColor = useTheme();
@@ -17,35 +18,7 @@ const HomeScreen = ({navigation, changeTheme, theme: {theme}}) => {
   };
 
   const renderLeftAction = () => <TopNavigationAction icon={theme === 'light' ? MoonIcon : SunIcon} onPress={changeTheme} />;
-
-  const renderHeaderTitle = (props) => (
-    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-      <TouchableWithoutFeedback onPress={() => setSelectedIndex(0)}>
-        <View style={styles.headerItem}>
-          <Text category={selectedIndex === 0 ? 'h5' : 'h6'} status={selectedIndex === 0 && 'primary'}>
-            关注
-          </Text>
-          <View style={[styles.headerBottom, selectedIndex === 0 && {backgroundColor: themeColor['color-primary-default']}]}></View>
-        </View>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback onPress={() => setSelectedIndex(1)}>
-        <View style={styles.headerItem}>
-          <Text category={selectedIndex === 1 ? 'h5' : 'h6'} status={selectedIndex === 1 && 'primary'}>
-            最新
-          </Text>
-          <View style={[styles.headerBottom, selectedIndex === 1 && {backgroundColor: themeColor['color-primary-default']}]}></View>
-        </View>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback onPress={() => setSelectedIndex(2)}>
-        <View style={styles.headerItem}>
-          <Text category={selectedIndex === 2 ? 'h5' : 'h6'} status={selectedIndex === 2 && 'primary'}>
-            热门
-          </Text>
-          <View style={[styles.headerBottom, selectedIndex === 2 && {backgroundColor: themeColor['color-primary-default']}]}></View>
-        </View>
-      </TouchableWithoutFeedback>
-    </View>
-  );
+  const renderHeaderTitle = (props) => <TopTabs tabs={['关注', '最新', '热门']} {...{selectedIndex, setSelectedIndex}} />;
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -57,15 +30,17 @@ const HomeScreen = ({navigation, changeTheme, theme: {theme}}) => {
       />
       <Divider />
 
-      <Layout
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          paddingHorizontal: globalStyles.paddingHorizontal,
-          paddingVertical: globalStyles.paddingVertical,
-        }}>
-        <Button onPress={navigateDetails}>OPEN DETAILS</Button>
-      </Layout>
+      <ViewPager selectedIndex={selectedIndex} onSelect={(index) => setSelectedIndex(index)}>
+        <Layout style={styles.tab} level="2">
+          <Text category="h1">关注</Text>
+        </Layout>
+        <Layout style={styles.tab} level="2">
+          <Text category="h1">最新</Text>
+        </Layout>
+        <Layout style={styles.tab} level="2">
+          <Text category="h1">热门</Text>
+        </Layout>
+      </ViewPager>
     </SafeAreaView>
   );
 };
@@ -73,17 +48,10 @@ const HomeScreen = ({navigation, changeTheme, theme: {theme}}) => {
 export default connect((state) => ({theme: state.theme}), {changeTheme})(HomeScreen);
 
 const styles = StyleSheet.create({
-  headerItem: {
-    display: 'flex',
+  tab: {
+    height: '100%',
     alignItems: 'center',
-    width: 70,
-    padding: 0,
-    margin: 0,
-  },
-  headerBottom: {
-    marginTop: 4,
-    height: 4,
-    width: 20,
-    borderRadius: 2,
+    paddingHorizontal: globalStyles.paddingHorizontal,
+    paddingVertical: globalStyles.paddingVertical,
   },
 });
