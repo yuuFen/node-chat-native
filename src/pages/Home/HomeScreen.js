@@ -1,19 +1,38 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
-import {Button, Divider, Layout, TopNavigation} from '@ui-kitten/components';
+import {
+  Button,
+  Divider,
+  Layout,
+  TopNavigation,
+  TopNavigationAction,
+} from '@ui-kitten/components';
 
 import {connect} from 'react-redux';
 import {changeTheme} from '../../actions/themeAction';
 import globalStyles from '../../constants/globalStyles';
+import {MoonIcon, SunIcon} from '../../components/Icons';
 
-const HomeScreen = ({navigation, changeTheme}) => {
+const HomeScreen = ({navigation, changeTheme, theme: {theme}}) => {
   const navigateDetails = () => {
     navigation.navigate('HomeDetails');
   };
 
+  const renderLeftAction = () => (
+    <TopNavigationAction
+      icon={theme === 'light' ? MoonIcon : SunIcon}
+      onPress={changeTheme}
+    />
+  );
+
   return (
     <SafeAreaView style={{flex: 1}}>
-      <TopNavigation title="首页" alignment="center" />
+      <TopNavigation
+        alignment="center"
+        title="首页"
+        accessoryLeft={renderLeftAction}
+        // accessoryRight={renderRightActions}
+      />
       <Divider />
       <Layout
         style={{
@@ -23,12 +42,11 @@ const HomeScreen = ({navigation, changeTheme}) => {
           paddingVertical: globalStyles.paddingVertical,
         }}>
         <Button onPress={navigateDetails}>OPEN DETAILS</Button>
-        <Button style={{marginVertical: 4}} onPress={changeTheme}>
-          TOGGLE THEME
-        </Button>
       </Layout>
     </SafeAreaView>
   );
 };
 
-export default connect(() => ({}), {changeTheme})(HomeScreen);
+export default connect((state) => ({theme: state.theme}), {changeTheme})(
+  HomeScreen,
+);

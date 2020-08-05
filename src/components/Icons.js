@@ -5,9 +5,14 @@ export const CameraIcon = (props) => <Icon {...props} name="camera-outline" />;
 export const EditIcon = (props) => <Icon {...props} name="edit" />;
 export const SetIcon = (props) => <Icon {...props} name="menu-2-outline" />;
 export const SearchIcon = (props) => <Icon {...props} name="search-outline" />;
-export const SettingIcon = (props) => (
-  <Icon {...props} name="settings-outline" />
-);
-export const MessageIcon = (props) => (
-  <Icon {...props} name="message-circle-outline" />
-);
+export const MoonIcon = (props) => <Icon {...props} name="moon" fill="#f9d845" />;
+export const SunIcon = (props) => <Icon {...props} name="sun" fill="#f9d845" />;
+export const SettingIcon = (props) => <Icon {...props} name="settings-outline" />;
+export const MessageIcon = (props) => <Icon {...props} name="message-circle-outline" />;
+export const PersonIcon = (props) => <Icon {...props} name="person-outline" />;
+export const BellIcon = (props) => <Icon {...props} name="bell-outline" />;
+export const EmailIcon = (props) => <Icon {...props} name="email-outline" />;
+export const MoreIcon = (props) => <Icon {...props} name="color-palette-outline" />;
+export const AtIcon = (props) => <Icon {...props} name="at-outline" />;
+export const LoveIcon = (props) => <Icon {...props} name="heart-outline" />;
+export const PersonAddIcon = (props) => <Icon {...props} name="person-add-outline" />;
