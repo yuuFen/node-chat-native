@@ -10,6 +10,7 @@ import {
   TopNavigation,
   Icon,
 } from '@ui-kitten/components';
+import globalStyles from '../../constants/globalStyles';
 import ThreadList from '../../components/ThreadList';
 
 import {connect} from 'react-redux';
@@ -116,7 +117,8 @@ const MineScreen = ({navigation}) => {
         style={{
           flex: 1,
           alignItems: 'center',
-          padding: 20,
+          paddingHorizontal: globalStyles.paddingHorizontal,
+          paddingVertical: globalStyles.paddingVertical,
         }}>
         {renderUserinfoCard(mockUserinfo)}
         <Button
