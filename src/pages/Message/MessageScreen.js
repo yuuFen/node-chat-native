@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {Divider, Text, Button, Layout, MenuItem, OverflowMenu, TopNavigation, TopNavigationAction, Input, ButtonGroup} from '@ui-kitten/components';
-import {SettingIcon, EditIcon, MessageIcon, SetIcon, CameraIcon, SearchIcon, AtIcon, LoveIcon, PersonAddIcon} from '../../components/Icons';
+import {SettingIcon, EditIcon, MessageIcon, SetIcon, CameraIcon, SearchIcon, AtIcon, LikeIcon, PersonAddIcon} from '../../components/Icons';
 import globalStyles from '../../constants/globalStyles';
 
 export default MessageScreen = ({navigation}) => {
@@ -48,7 +48,7 @@ export default MessageScreen = ({navigation}) => {
           <Button style={styles.msgBtn} accessoryLeft={AtIcon}>
             @我
           </Button>
-          <Button style={styles.msgBtn} accessoryLeft={LoveIcon}>
+          <Button style={styles.msgBtn} accessoryLeft={LikeIcon}>
             喜欢
           </Button>
           <Button style={styles.msgBtn} accessoryLeft={PersonAddIcon}>

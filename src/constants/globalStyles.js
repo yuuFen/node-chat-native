@@ -5,6 +5,9 @@ export default globalStyles = {
   paddingHorizontal: 15,
   paddingVertical: 10,
 
+  // tabbar 高度
+  tabBar: 60,
+
   /** color **/
   // 常用颜色
   red: '#FF0000',
@@ -67,10 +70,7 @@ export default globalStyles = {
   navStatusBarHeight: Platform.OS === 'ios' ? 20 : 0,
   // 导航栏除掉状态栏的高度
   navContentHeight: Platform.OS === 'ios' ? 44 : 56,
-  // tabBar的高度
-  tabBar: 49,
-  // 底部按钮高度
-  bottonBtnHeight: 44,
+
   // 通用列表cell高度
   cellHeight: 44,
   // 导航栏左右按钮image高度

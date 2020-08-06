@@ -1,15 +1,13 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
+import globalStyles from '../constants/globalStyles';
 
 import {Icon, BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
 import {BellIcon, MessageIcon, PersonIcon, MoreIcon} from '../components/Icons';
 
 export default TabbarShowcase = ({navigation, state}) => {
   return (
-    <BottomNavigation
-      // style={styles.bottomNavigation}
-      selectedIndex={state.index}
-      onSelect={(index) => navigation.navigate(state.routeNames[index])}>
+    <BottomNavigation style={{height: globalStyles.tabBar}} selectedIndex={state.index} onSelect={(index) => navigation.navigate(state.routeNames[index])}>
       <BottomNavigationTab title="广场" icon={BellIcon} />
       <BottomNavigationTab title="发现" icon={MoreIcon} />
       <BottomNavigationTab title="消息" icon={MessageIcon} />

@@ -1,40 +1,22 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {
-  Avatar,
-  Card,
-  Text,
-  Button,
-  Divider,
-  Layout,
-  TopNavigation,
-  Icon,
-} from '@ui-kitten/components';
+import {Avatar, Card, Text, Button, Divider, Layout, Icon} from '@ui-kitten/components';
 import globalStyles from '../../constants/globalStyles';
-import ThreadList from '../../components/ThreadList';
 
 import {connect} from 'react-redux';
 
-import mockThreads from './data';
 const mockUserinfo = {
   id: 1001,
   avatar_normal: 'https://jdc.jd.com/img/100',
   username: '闪亮之裤',
   sex: 1,
   creations: 12,
-  loves: 64,
+  likes: 64,
   coins: 15,
 };
 
 const MineScreen = ({navigation}) => {
-  const renderUserinfoCard = ({
-    avatar_normal,
-    nick,
-    sex,
-    creations,
-    loves,
-    coins,
-  }) => {
+  const renderUserinfoCard = ({avatar_normal, nick, sex, creations, likes, coins}) => {
     const renderItem = (num, name) => {
       return (
         <View style={{width: '33.3%', alignItems: 'center'}}>
@@ -51,11 +33,7 @@ const MineScreen = ({navigation}) => {
     return (
       <Card style={{width: '100%'}} onPress={navigateUserinfo}>
         <View style={styles.userinfoContainer}>
-          <Avatar
-            style={{margin: 8, marginRight: 12}}
-            size="giant"
-            source={{uri: avatar_normal}}
-          />
+          <Avatar style={{margin: 8, marginRight: 12}} size="giant" source={{uri: avatar_normal}} />
           <View style={{flex: 1}}>
             <Text status="primary" category="h6" style={{paddingBottom: 6}}>
               {nick}
@@ -64,16 +42,12 @@ const MineScreen = ({navigation}) => {
               {sex ? '男生' : '女生'}
             </Text>
           </View>
-          <Icon
-            style={{width: 32, height: 32}}
-            fill="#8F9BB3"
-            name="arrow-ios-forward-outline"
-          />
+          <Icon style={{width: 32, height: 32}} fill="#8F9BB3" name="arrow-ios-forward-outline" />
         </View>
         <Divider />
         <View style={styles.achieveContainer}>
           {renderItem(creations, '主题')}
-          {renderItem(loves, '喜欢')}
+          {renderItem(likes, '喜欢')}
           {renderItem(coins, '金币')}
         </View>
       </Card>
@@ -100,7 +74,6 @@ const MineScreen = ({navigation}) => {
           {renderHeaderItem(212, '被关注')}
           {renderHeaderItem(2412, '看过我')}
         </View>
-        <ThreadList threads={mockThreads} />
       </View>
     );
   };
@@ -121,12 +94,7 @@ const MineScreen = ({navigation}) => {
           paddingVertical: globalStyles.paddingVertical,
         }}>
         {renderUserinfoCard(mockUserinfo)}
-        <Button
-          status="danger"
-          style={styles.authBtn}
-          accessoryLeft={(props) => (
-            <Icon {...props} name="color-palette-outline" />
-          )}>
+        <Button status="danger" style={styles.authBtn} accessoryLeft={(props) => <Icon {...props} name="color-palette-outline" />}>
           {(evaProps) => (
             <>
               <Text {...evaProps}>你还未完成认证</Text>

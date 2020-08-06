@@ -14,5 +14,5 @@ export const BellIcon = (props) => <Icon {...props} name="bell-outline" />;
 export const EmailIcon = (props) => <Icon {...props} name="email-outline" />;
 export const MoreIcon = (props) => <Icon {...props} name="color-palette-outline" />;
 export const AtIcon = (props) => <Icon {...props} name="at-outline" />;
-export const LoveIcon = (props) => <Icon {...props} name="heart-outline" />;
+export const LikeIcon = (props) => <Icon {...props} name="heart-outline" />;
 export const PersonAddIcon = (props) => <Icon {...props} name="person-add-outline" />;

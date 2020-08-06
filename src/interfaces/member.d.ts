@@ -9,7 +9,7 @@ export interface IMember {
   location?: null;
   created_days: number; // 创建时间 xx 天
   creations: number; // 创作数
-  loves: number; // 喜欢数
+  likes: number; // 喜欢数
   sex: number;
   coins: number; // 金币数
 }
