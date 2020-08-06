@@ -7,9 +7,12 @@ export interface IMember {
   avatar_large: string;
   tagline?: null; // 个性宣言
   location?: null;
-  created_days: number; // 创建时间 xx 天
-  creations: number; // 创作数
-  likes: number; // 喜欢数
+  days: number; // 创建时间 xx 天
+  threads: number; // 发表主题数
+  likes: number; // 被喜欢数
+  liking: number; // 喜欢数
   sex: number;
   coins: number; // 金币数
+  following: number;
+  follows: number;
 }

@@ -16,3 +16,7 @@ export const MoreIcon = (props) => <Icon {...props} name="color-palette-outline"
 export const AtIcon = (props) => <Icon {...props} name="at-outline" />;
 export const LikeIcon = (props) => <Icon {...props} name="heart-outline" />;
 export const PersonAddIcon = (props) => <Icon {...props} name="person-add-outline" />;
+export const FeedBackIcon = (props) => <Icon {...props} name="info-outline" />;
+export const ThreadIcon = (props) => <Icon {...props} name="paper-plane-outline" />;
+export const ForwardIcon = (props) => <Icon {...props} name="arrow-ios-forward-outline" />;
+export const SmileIcon = (props) => <Icon {...props} name="smiling-face-outline" />;

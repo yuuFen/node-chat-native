@@ -1,22 +1,32 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {Avatar, Card, Text, Button, Divider, Layout, Icon} from '@ui-kitten/components';
-import globalStyles from '../../constants/globalStyles';
-
 import {connect} from 'react-redux';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {Avatar, Card, Text, Button, Divider, Layout, Icon, Menu, MenuItem, TopNavigation} from '@ui-kitten/components';
+import globalStyles from '../../constants/globalStyles';
+import SimpleCard from '../../components/SimpleCard';
+import {LikeIcon, SettingIcon, FeedBackIcon, ThreadIcon, ForwardIcon, SmileIcon} from '../../components/Icons';
 
 const mockUserinfo = {
   id: 1001,
-  avatar_normal: 'https://jdc.jd.com/img/100',
+  avatar_normal: 'https://cdn.v2ex.com/avatar/16be/f3f7/473250_large.png?m=1582979052',
   username: '闪亮之裤',
   sex: 1,
-  creations: 12,
+  threads: 12,
   likes: 64,
+  liking: 1023,
   coins: 15,
+  following: 103,
+  follows: 12,
+  days: 61,
 };
 
 const MineScreen = ({navigation}) => {
-  const renderUserinfoCard = ({avatar_normal, username, sex, creations, likes, coins}) => {
+  const {avatar_normal, username, sex, threads, likes, coins, following, follows, liking} = mockUserinfo;
+  const navigateUserinfo = () => {
+    navigation.navigate('Userinfo');
+  };
+
+  const renderUserinfoCard = () => {
     const renderItem = (num, name) => {
       return (
         <View style={{width: '33.3%', alignItems: 'center'}}>
@@ -31,7 +41,7 @@ const MineScreen = ({navigation}) => {
     };
 
     return (
-      <Card style={{width: '100%'}} onPress={navigateUserinfo}>
+      <SimpleCard style={{marginTop: 12}}>
         <View style={styles.userinfoContainer}>
           <Avatar style={{margin: 8, marginRight: 12}} size="giant" source={{uri: avatar_normal}} />
           <View style={{flex: 1}}>
@@ -42,51 +52,53 @@ const MineScreen = ({navigation}) => {
               {sex ? '男生' : '女生'}
             </Text>
           </View>
-          <Icon style={{width: 32, height: 32}} fill="#8F9BB3" name="arrow-ios-forward-outline" />
+          <ForwardIcon style={{width: 20, height: 20}} fill="#8F9BB3" name="arrow-ios-forward-outline" />
         </View>
         <Divider />
         <View style={styles.achieveContainer}>
-          {renderItem(creations, '主题')}
-          {renderItem(likes, '喜欢')}
+          {renderItem(following, '关注')}
+          {renderItem(follows, '被关注')}
           {renderItem(coins, '金币')}
         </View>
-      </Card>
+      </SimpleCard>
     );
   };
 
-  const renderContent = () => {
-    const renderHeaderItem = (num, name) => {
-      return (
-        <View style={{width: '33.3%', alignItems: 'center'}}>
-          <Text appearance="hint" category="c1">
-            {name}
-          </Text>
-          <Text status="primary" category="h6">
-            {num}
-          </Text>
-        </View>
-      );
-    };
+  const renderRecordCard = () => {
     return (
-      <View style={{width: '100%', borderWidth: 0}}>
-        <View style={{...styles.achieveContainer, paddingTop: 0}}>
-          {renderHeaderItem(213, '关注')}
-          {renderHeaderItem(212, '被关注')}
-          {renderHeaderItem(2412, '看过我')}
-        </View>
-      </View>
+      <SimpleCard style={{padding: 0, paddingVertical: 1}}>
+        <Menu>
+          <MenuItem
+            style={{paddingHorizontal: 6}}
+            title="我的喜欢"
+            accessoryLeft={LikeIcon}
+            accessoryRight={() => (
+              <Text style={{fontWeight: 'bold', paddingHorizontal: 12}} status="primary">
+                {liking}
+              </Text>
+            )}
+          />
+          <MenuItem
+            style={{paddingHorizontal: 6}}
+            title="我的主题"
+            accessoryLeft={ThreadIcon}
+            accessoryRight={() => (
+              <Text style={{fontWeight: 'bold', paddingHorizontal: 12}} status="primary">
+                {threads}
+              </Text>
+            )}
+          />
+          <MenuItem style={{paddingHorizontal: 6}} title="设置" accessoryLeft={SettingIcon} accessoryRight={ForwardIcon} />
+          <MenuItem style={{paddingHorizontal: 6}} title="反馈问题" accessoryLeft={FeedBackIcon} accessoryRight={ForwardIcon} />
+        </Menu>
+      </SimpleCard>
     );
-  };
-
-  const navigateUserinfo = () => {
-    navigation.navigate('Userinfo');
   };
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      {/* <TopNavigation title="我的" alignment="center" /> */}
-      {/* <Divider /> */}
       <Layout
+        // level="2"
         style={{
           flex: 1,
           alignItems: 'center',
@@ -94,7 +106,7 @@ const MineScreen = ({navigation}) => {
           paddingVertical: globalStyles.paddingVertical,
         }}>
         {renderUserinfoCard(mockUserinfo)}
-        <Button status="danger" style={styles.authBtn} accessoryLeft={(props) => <Icon {...props} name="color-palette-outline" />}>
+        <Button status="danger" style={styles.authBtn} accessoryLeft={(props) => <Icon {...props} name="attach" />}>
           {(evaProps) => (
             <>
               <Text {...evaProps}>你还未完成认证</Text>
@@ -102,7 +114,7 @@ const MineScreen = ({navigation}) => {
             </>
           )}
         </Button>
-        {renderContent()}
+        {renderRecordCard()}
       </Layout>
     </SafeAreaView>
   );
@@ -115,6 +127,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingBottom: 12,
+    // paddingHorizontal: 6,
   },
   achieveContainer: {
     flexDirection: 'row',
