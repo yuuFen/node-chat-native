@@ -5,7 +5,7 @@ export default globalStyles = {
   paddingHorizontal: 15,
   paddingVertical: 10,
 
-  // tabbar 高度
+  // tabbar 高度（没有用到）
   tabBar: 60,
 
   /** color **/

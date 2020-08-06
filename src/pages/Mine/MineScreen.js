@@ -16,7 +16,7 @@ const mockUserinfo = {
 };
 
 const MineScreen = ({navigation}) => {
-  const renderUserinfoCard = ({avatar_normal, nick, sex, creations, likes, coins}) => {
+  const renderUserinfoCard = ({avatar_normal, username, sex, creations, likes, coins}) => {
     const renderItem = (num, name) => {
       return (
         <View style={{width: '33.3%', alignItems: 'center'}}>
@@ -36,7 +36,7 @@ const MineScreen = ({navigation}) => {
           <Avatar style={{margin: 8, marginRight: 12}} size="giant" source={{uri: avatar_normal}} />
           <View style={{flex: 1}}>
             <Text status="primary" category="h6" style={{paddingBottom: 6}}>
-              {nick}
+              {username}
             </Text>
             <Text appearance="hint" category="c1">
               {sex ? '男生' : '女生'}

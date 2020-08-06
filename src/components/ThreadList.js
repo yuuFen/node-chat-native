@@ -1,7 +1,6 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {Avatar, List, Card, Text, Button, Divider, Layout, TopNavigation, Icon, useTheme} from '@ui-kitten/components';
-import {LikeIcon} from './Icons';
+import {StyleSheet, View} from 'react-native';
+import {Avatar, Card, Text, Icon, List} from '@ui-kitten/components';
 import globalStyles from '../constants/globalStyles';
 
 const ThreadList = ({threads}) => {
@@ -9,11 +8,11 @@ const ThreadList = ({threads}) => {
     return (
       <Card style={styles.itemCard}>
         <Text numberOfLines={3} style={{lineHeight: 25}}>
-          直男提问，女朋友生日送什么？500预算，化妆品就不送了，不一定是一件礼物，求助求助求助直男提问，求助直男提问，求助直男提问，求助直男提问，女朋友生日送什么？5
+          直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问
         </Text>
         <View style={styles.itemBottom}>
           <View style={styles.itemBottomLeft}>
-            <Avatar size="tiny" source={{uri: 'https://jdc.jd.com/img/100'}} />
+            <Avatar size="tiny" source={{uri: 'https://cdn.v2ex.com/avatar/16be/f3f7/473250_large.png?m=1582979052'}} />
             <Text style={{paddingHorizontal: 10, fontWeight: 'bold'}} appearance="hint">
               茶几叽叽叽
             </Text>
@@ -35,7 +34,7 @@ const ThreadList = ({threads}) => {
       </Card>
     );
   };
-  return <List style={{width: '100%'}} contentContainerStyle={styles.contentContainer} data={threads} renderItem={renderItem} />;
+  return <List style={{width: '100%'}} contentContainerStyle={styles.contentContainer} data={threads} renderItem={renderItem} keyExtractor={(item, index) => index.toString()} />;
 };
 
 export default ThreadList;
