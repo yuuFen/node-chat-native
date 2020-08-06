@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import TabbarShowcase from './TabbarShowcase';
 
-import HomeScreen from './Home/HomeScreen';
+import HomeNavigation from './Home/HomeNavigation';
 import MoreScreen from './More/MoreScreen';
 import MessageScreen from './Message/MessageScreen';
 import MineScreen from './Mine/MineScreen';
@@ -20,7 +20,7 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => (
   <Tab.Navigator tabBar={(props) => <TabbarShowcase {...props} />}>
-    <Tab.Screen name="Home" component={HomeScreen} />
+    <Tab.Screen name="Home" component={HomeNavigation} />
     <Tab.Screen name="More" component={MoreScreen} />
     <Tab.Screen name="Message" component={MessageScreen} />
     <Tab.Screen name="Mine" component={MineScreen} />
@@ -48,7 +48,7 @@ export default AppNavigator = () => {
         ) : (
           <>
             <Stack.Screen
-              name="Message"
+              name="Main"
               component={TabNavigator}
               options={{
                 headerShown: false,
