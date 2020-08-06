@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {changeTheme} from '../../actions/themeAction';
+import {changeTheme} from '../actions/themeAction';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 // TODO: 动画
 import Animated from 'react-native-reanimated';
 import {Text, useTheme, TopNavigation, TopNavigationAction} from '@ui-kitten/components';
-import {MoonIcon, SunIcon} from '../../components/Icons';
+import {MoonIcon, SunIcon} from './Icons';
 
 TopTabbarShowcase = ({state, descriptors, navigation, position, changeTheme}) => {
   const theme = useTheme();
@@ -42,7 +42,7 @@ TopTabbarShowcase = ({state, descriptors, navigation, position, changeTheme}) =>
           //   inputRange,
           //   outputRange: inputRange.map((i) => (i === index ? 1 : 0)),
           // });
-          
+
           return (
             <TouchableOpacity
               key={label}
@@ -50,8 +50,7 @@ TopTabbarShowcase = ({state, descriptors, navigation, position, changeTheme}) =>
               accessibilityStates={isFocused ? ['selected'] : []}
               accessibilityLabel={options.tabBarAccessibilityLabel}
               testID={options.tabBarTestID}
-              onPress={onPress}
-              onLongPress={onLongPress}>
+              onPress={onPress}>
               <View style={styles.headerItem}>
                 <Text category={isFocused ? 'h5' : 'h6'} status={isFocused && 'primary'}>
                   {label}

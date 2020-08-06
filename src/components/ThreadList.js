@@ -34,7 +34,7 @@ const ThreadList = ({threads}) => {
       </Card>
     );
   };
-  return <List style={{width: '100%'}} contentContainerStyle={styles.contentContainer} data={threads} renderItem={renderItem} keyExtractor={(item, index) => index.toString()} />;
+  return <List style={{width: '100%'}} contentContainerStyle={styles.contentContainer} data={threads} renderItem={renderItem} keyExtractor={(item, index) => item.id.toString()} />;
 };
 
 export default ThreadList;

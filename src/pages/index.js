@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => (
-  <Tab.Navigator tabBar={(props) => <TabbarShowcase {...props} />}>
+  <Tab.Navigator backBehavior="none" tabBar={(props) => <TabbarShowcase {...props} />}>
     <Tab.Screen name="Home" component={HomeNavigation} />
     <Tab.Screen name="More" component={MoreScreen} />
     <Tab.Screen name="Message" component={MessageScreen} />
