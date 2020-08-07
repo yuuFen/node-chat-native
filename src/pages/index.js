@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -14,6 +15,8 @@ import MessageDetailsScreen from './Message/DetailsScreen';
 import UserinfoScreen from './Mine/UserinfoScreen';
 
 import Welcome from './Welcome';
+import LoginScreen from './Login/LoginScreen';
+import PhoneLoginScreen from './Login/PhoneLoginScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,24 +30,40 @@ const TabNavigator = () => (
   </Tab.Navigator>
 );
 
-export default AppNavigator = () => {
-  const [isFirst, setIsFirst] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setIsFirst(false);
-    }, 10);
-  }, []);
+AppNavigator = ({user}) => {
+  // const [isFirst, setIsFirst] = useState(true);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsFirst(false);
+  //   }, 100);
+  // }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {isFirst ? (
-          <Stack.Screen
-            name="Welcome"
-            component={Welcome}
-            options={{
-              headerShown: false,
-            }}
-          />
+        {!user.isLogin ? (
+          // <Stack.Screen
+          //   name="Welcome"
+          //   component={Welcome}
+          //   options={{
+          //     headerShown: false,
+          //   }}
+          // />
+          <>
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="PhoneLogin"
+              options={{
+                headerShown: false,
+              }}
+              component={PhoneLoginScreen}
+            />
+          </>
         ) : (
           <>
             <Stack.Screen
@@ -81,3 +100,10 @@ export default AppNavigator = () => {
     </NavigationContainer>
   );
 };
+
+export default connect(
+  (state) => ({
+    user: state.user,
+  }),
+  {},
+)(AppNavigator);
