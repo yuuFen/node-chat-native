@@ -1,17 +1,17 @@
 import {combineReducers, createStore, applyMiddleware} from 'redux';
 
-// import thunk from 'redux-thunk';
+import thunk from 'redux-thunk';
 // import logger from "redux-logger";
 
-import themeReducer from './themeReducer';
+import globalReducer from './globalReducer';
 import userReducer from './userReducer';
 
 const store = createStore(
   combineReducers({
-    theme: themeReducer,
+    theme: globalReducer,
     user: userReducer,
   }),
   // //applyMiddleware(logger, thunk)
-  // applyMiddleware(thunk),
+  applyMiddleware(thunk),
 );
 export default store;

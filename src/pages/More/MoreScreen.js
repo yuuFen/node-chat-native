@@ -3,11 +3,10 @@ import {SafeAreaView} from 'react-native';
 import {Button, Divider, Layout, TopNavigation, Text} from '@ui-kitten/components';
 
 import {connect} from 'react-redux';
-import {changeTheme} from '../../actions/themeAction';
 import globalStyles from '../../constants/globalStyles';
 import {MoonIcon, SunIcon} from '../../components/Icons';
 
-const More = ({navigation, changeTheme, theme: {theme}}) => {
+const More = ({navigation}) => {
   const navigateDetails = () => {
     navigation.navigate('HomeDetails');
   };
@@ -29,4 +28,4 @@ const More = ({navigation, changeTheme, theme: {theme}}) => {
   );
 };
 
-export default connect((state) => ({theme: state.theme}), {changeTheme})(More);
+export default More;

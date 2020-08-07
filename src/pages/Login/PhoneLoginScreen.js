@@ -5,6 +5,7 @@ import {Avatar, Card, Text, Button, Divider, Layout, Icon, Modal, Input, Select,
 import globalStyles from '../../constants/globalStyles';
 import SimpleCard from '../../components/SimpleCard';
 import {LikeIcon, SettingIcon, FeedBackIcon, ThreadIcon, ForwardIcon, SmileIcon} from '../../components/Icons';
+import {accountLogin} from '../../services/login';
 
 export default PhoneLoginScreen = ({navigation}) => {
   const [phone, setPhone] = useState('');
@@ -18,7 +19,12 @@ export default PhoneLoginScreen = ({navigation}) => {
         </View> */}
         <Input value={phone} maxLength={11} keyboardType="numeric" placeholder="请输入手机号" onChangeText={(nextValue) => setPhone(nextValue)} />
         <Input value={password} placeholder="请输入密码" onChangeText={(nextValue) => setPassword(nextValue)} secureTextEntry={true} />
-        <Button onPress={() => {}}>登录</Button>
+        <Button
+          onPress={() => {
+            accountLogin({username: phone, password});
+          }}>
+          登录
+        </Button>
       </Layout>
     </SafeAreaView>
   );

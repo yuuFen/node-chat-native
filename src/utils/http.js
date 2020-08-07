@@ -1,5 +1,3 @@
-import {APIS, Token} from '../constants/API';
-
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -48,15 +46,11 @@ const errorHandler = (error) => {
 
   return response;
 };
-/**
- * 配置request请求时的默认参数
- */
 
-const request = extend({
-  errorHandler,
-  // 默认错误处理
-  credentials: 'include', // 默认请求是否带上cookie
-});
+import store from '../store/index';
+
+// 把token存在本地缓存，不要放在store，或者都放一份。token中保存设备号
+const token = store.getState().user.token;
 
 let defaultReqData = {
   serviceType: '',
@@ -64,7 +58,7 @@ let defaultReqData = {
   timeOut: common_timeOut,
 };
 
-const common_url = APIS.Main_Path;
+const common_url = 'http://m.app.haosou.com/index';
 const common_timeOut = 5000;
 
 /**
@@ -74,7 +68,6 @@ const common_timeOut = 5000;
  * @param {string} arg.serviceType 路径
  * @param {number} arg.timeOut 超时
  * @param {Object} arg.params  参数
- * @param {Function} arg.success arg.success arg.error 回调
  */
 let fetchGet = (arg) => {
   const {serviceType, timeOut, params, success, fail, error} = arg;
@@ -83,9 +76,7 @@ let fetchGet = (arg) => {
   if (params) {
     let paramsArray = [];
     //拼接参数
-    Object.keys(params).forEach((key) =>
-      paramsArray.push(key + '=' + params[key]),
-    );
+    Object.keys(params).forEach((key) => paramsArray.push(key + '=' + params[key]));
     if (url.search(/\?/) === -1) {
       url += '?' + paramsArray.join('&');
     } else {
@@ -103,21 +94,12 @@ let fetchGet = (arg) => {
   }
   console.log('fetchGet request', url, params);
   // fetch 请求
-  _fetch(
+  return _fetch(
     fetch(url, {
       headers,
     }),
     timeOut,
-  )
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log('result', responseJson);
-      success && success(responseJson);
-    })
-    .catch((e) => {
-      console.log(e);
-      error && error(e);
-    });
+  ).then((response) => response.json());
 };
 
 /**
@@ -127,13 +109,10 @@ let fetchGet = (arg) => {
  * @param {string} arg.serviceType 路径
  * @param {number} arg.timeOut 超时
  * @param {Object} arg.params  参数
- * @param {Function} arg.success arg.success arg.error 回调
  */
 let fetchPost = (arg) => {
   const {serviceType, mainPath, timeOut, params, success, fail, error} = arg;
-  let url =
-    ('http://apiparty.xinhuaapp.com/Service' + mainPath || common_url) +
-    serviceType;
+  let url = ('http://apiparty.xinhuaapp.com/Service' + mainPath || common_url) + serviceType;
 
   console.log('request', url, params);
   let headers = {
@@ -145,30 +124,17 @@ let fetchPost = (arg) => {
     headers['Token'] = `${Token}`;
   }
 
-  _fetch(
+  return _fetch(
     fetch(url, {
       method: 'POST',
       headers,
       body: JSON.stringify(params),
     }),
     timeOut,
-  )
-    .then((response) => {
-      console.log('test1', response);
-      return response.json();
-    })
-    .then((responseJson) => {
-      console.log('test', responseJson);
-      if (responseJson.Status === 1) {
-        success && success(responseJson);
-      } else {
-        fail && fail(responseJson);
-      }
-    })
-    .catch((e) => {
-      console.log(e);
-      error && error(error);
-    });
+  ).then((response) => {
+    console.log('test1', response);
+    return response.json();
+  });
 };
 
 /**
@@ -179,7 +145,6 @@ let fetchPost = (arg) => {
  * @param {number} arg.timeOut 超时
  * @param {number} arg.images  图片
  * @param {Object} arg.params  参数
- * @param {Function} arg.success arg.success arg.error 回调
  */
 let fetchUpload = (arg) => {
   const {serviceType, timeOut, images, params, success, fail, error} = arg;
@@ -197,7 +162,7 @@ let fetchUpload = (arg) => {
     formData.append('file', file);
   }
   console.log('formData', url, formData);
-  _fetch(
+  return _fetch(
     fetch(url, {
       method: 'POST',
       headers: {
@@ -207,20 +172,7 @@ let fetchUpload = (arg) => {
       body: formData,
     }),
     timeOut,
-  )
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log(responseJson);
-      if (responseJson.Status === 1) {
-        success && success(responseJson);
-      } else {
-        fail && fail();
-      }
-    })
-    .catch((e) => {
-      console.log(e);
-      error && error(error);
-    });
+  ).then((response) => response.json());
 };
 
 function _fetch(fetch_promise, timeout = common_timeOut) {

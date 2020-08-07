@@ -1,7 +1,7 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
-import TopTabbarShowcase from '../../components/TopTabbarShowcase';
+import TopTabbarShowcase from './TopTabbarShowcase';
 
 import NewThreadList from './NewThreadList';
 import HotThreadList from './HotThreadList';

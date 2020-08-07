@@ -2,7 +2,7 @@ const initialState = {
   theme: 'light',
 };
 
-const themeReducer = (state = {...initialState}, action) => {
+const globalReducer = (state = {...initialState}, action) => {
   switch (action.type) {
     case 'changeTheme':
       return {...state, theme: state.theme === 'light' ? 'dark' : 'light'};
@@ -10,4 +10,4 @@ const themeReducer = (state = {...initialState}, action) => {
       return state;
   }
 };
-export default themeReducer;
+export default globalReducer;

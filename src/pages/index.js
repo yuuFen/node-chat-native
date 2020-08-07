@@ -31,39 +31,40 @@ const TabNavigator = () => (
 );
 
 AppNavigator = ({user}) => {
-  // const [isFirst, setIsFirst] = useState(true);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsFirst(false);
-  //   }, 100);
-  // }, []);
+  const [isFirst, setIsFirst] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsFirst(false);
+    }, 100);
+  }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {!user.isLogin ? (
-          // <Stack.Screen
-          //   name="Welcome"
-          //   component={Welcome}
-          //   options={{
-          //     headerShown: false,
-          //   }}
-          // />
-          <>
-            <Stack.Screen
-              name="Login"
-              component={LoginScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="PhoneLogin"
-              options={{
-                headerShown: false,
-              }}
-              component={PhoneLoginScreen}
-            />
-          </>
+        {isFirst ? (
+        // {!user.isLogin ? (
+          <Stack.Screen
+            name="Welcome"
+            component={Welcome}
+            options={{
+              headerShown: false,
+            }}
+          />
+          // <>
+          //   <Stack.Screen
+          //     name="Login"
+          //     component={LoginScreen}
+          //     options={{
+          //       headerShown: false,
+          //     }}
+          //   />
+          //   <Stack.Screen
+          //     name="PhoneLogin"
+          //     options={{
+          //       headerShown: false,
+          //     }}
+          //     component={PhoneLoginScreen}
+          //   />
+          // </>
         ) : (
           <>
             <Stack.Screen
