@@ -5,6 +5,9 @@ export default globalStyles = {
   paddingHorizontal: 15,
   paddingVertical: 10,
 
+  borderRadius: 8,
+  defaultCardBorderRadius: 4,
+
   // tabbar 高度（没有用到）
   tabBar: 60,
 

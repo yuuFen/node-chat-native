@@ -4,8 +4,7 @@ import {Avatar, Card, Text, Icon, List} from '@ui-kitten/components';
 
 const ThreadList = ({threads, navigation}) => {
   const navToThreadDetail = (item) => {
-    console.log(item);
-    navigation.navigate('ThreadDetail');
+    navigation.navigate('ThreadDetail', item.id);
   };
 
   const renderItem = ({item, index}) => {
