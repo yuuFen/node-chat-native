@@ -5,14 +5,14 @@ import TopTabbarShowcase from './TopTabbarShowcase';
 
 import NewThreadList from './NewThreadList';
 import HotThreadList from './HotThreadList';
-import NodeList from './NodeList';
+import FollowingThreadList from './FollowingThreadList';
 
 const {Navigator, Screen} = createMaterialTopTabNavigator();
 
 export default HomeNavigation = () => {
   return (
     <Navigator initialRouteName="New" backBehavior="none" tabBar={(props) => <TopTabbarShowcase {...props} />}>
-      <Screen name="Nodes" options={{tabBarLabel: '节点'}} component={NodeList} />
+      <Screen name="Nodes" options={{tabBarLabel: '关注'}} component={FollowingThreadList} />
       <Screen name="New" options={{tabBarLabel: '最新'}} component={NewThreadList} />
       <Screen name="Hot" options={{tabBarLabel: '热门'}} component={HotThreadList} />
     </Navigator>

@@ -3,7 +3,6 @@ import {SafeAreaView, TouchableOpacity, TextInput, View, StyleSheet, Image, Dime
 import {Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, useTheme} from '@ui-kitten/components';
 
 import {CloseIcon, PlusIcon} from '../../components/Icons';
-import {debounce} from '../../utils/utils';
 
 export default EditThreadScreen = ({navigation}) => {
   const theme = useTheme();
