@@ -10,7 +10,7 @@ import MoreScreen from './More/MoreScreen';
 import MessageScreen from './Message/MessageScreen';
 import MineScreen from './Mine/MineScreen';
 
-import HomeDetailsScreen from './Home/ThreadDetailsScreen';
+import ThreadDetailScreen from './Home/ThreadDetailScreen';
 import EditThreadScreen from './Home/EditThreadScreen';
 import MessageDetailsScreen from './Message/DetailsScreen';
 import UserinfoScreen from './Mine/UserinfoScreen';
@@ -76,8 +76,8 @@ AppNavigator = ({user}) => {
               }}
             />
             <Stack.Screen
-              name="HomeDetails"
-              component={HomeDetailsScreen}
+              name="ThreadDetail"
+              component={ThreadDetailScreen}
               options={{
                 headerShown: false,
               }}

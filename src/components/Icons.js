@@ -12,7 +12,8 @@ export const MessageIcon = (props) => <Icon {...props} name="message-circle-outl
 export const PersonIcon = (props) => <Icon {...props} name="person-outline" />;
 export const BellIcon = (props) => <Icon {...props} name="bell-outline" />;
 export const EmailIcon = (props) => <Icon {...props} name="email-outline" />;
-export const MoreIcon = (props) => <Icon {...props} name="color-palette-outline" />;
+export const FindIcon = (props) => <Icon {...props} name="color-palette-outline" />;
+export const MoreIcon = (props) => <Icon {...props} name="more-vertical-outline" />;
 export const AtIcon = (props) => <Icon {...props} name="at-outline" />;
 export const LikeIcon = (props) => <Icon {...props} name="heart-outline" />;
 export const PersonAddIcon = (props) => <Icon {...props} name="person-add-outline" />;
@@ -22,3 +23,4 @@ export const ForwardIcon = (props) => <Icon {...props} name="arrow-ios-forward-o
 export const SmileIcon = (props) => <Icon {...props} name="smiling-face-outline" />;
 export const CloseIcon = (props) => <Icon {...props} name="close-outline" />;
 export const PlusIcon = (props) => <Icon {...props} name="plus-outline" />;
+export const ReportIcon = (props) => <Icon {...props} name="alert-circle-outline" />;

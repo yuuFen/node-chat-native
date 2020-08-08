@@ -1,20 +1,28 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {Avatar, Card, Text, Icon, List} from '@ui-kitten/components';
 
-const ThreadList = ({threads}) => {
+const ThreadList = ({threads, navigation}) => {
+  const navToThreadDetail = (item) => {
+    console.log(item);
+    navigation.navigate('ThreadDetail');
+  };
+
   const renderItem = ({item, index}) => {
     return (
-      <Card style={styles.itemCard}>
+      <Card style={styles.itemCard} onPress={() => navToThreadDetail(item)}>
         <Text numberOfLines={3} style={{lineHeight: 25}}>
           直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问直男提问
         </Text>
         <View style={styles.itemBottom}>
           <View style={styles.itemBottomLeft}>
-            <Avatar size="tiny" source={{uri: 'https://cdn.v2ex.com/avatar/16be/f3f7/473250_large.png?m=1582979052'}} />
-            <Text style={{paddingHorizontal: 10, fontWeight: 'bold'}} appearance="hint">
-              茶几叽叽叽
-            </Text>
+            <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Avatar size="tiny" source={{uri: 'https://cdn.v2ex.com/avatar/16be/f3f7/473250_large.png?m=1582979052'}} />
+              <Text style={{paddingHorizontal: 10, fontWeight: 'bold'}} appearance="hint">
+                茶几叽叽叽
+              </Text>
+            </TouchableOpacity>
+
             <Text appearance="hint" category="c1">
               1分钟前
             </Text>
@@ -22,17 +30,22 @@ const ThreadList = ({threads}) => {
           <View style={styles.itemBottomRight}>
             <View style={styles.itemBottomRightItem}>
               <Text appearance="hint">11</Text>
-              <Icon style={{width: 25, height: 25}} fill="#8F9BB3" name={false ? 'heart' : 'heart-outline'} />
+              <TouchableOpacity>
+                <Icon style={{width: 25, height: 25}} fill="#8F9BB3" name={false ? 'heart' : 'heart-outline'} />
+              </TouchableOpacity>
             </View>
             <View style={styles.itemBottomRightItem}>
               <Text appearance="hint">23</Text>
-              <Icon style={{width: 25, height: 25}} fill="#8F9BB3" name="message-circle-outline" />
+              <TouchableOpacity>
+                <Icon style={{width: 25, height: 25}} fill="#8F9BB3" name="message-circle-outline" />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
       </Card>
     );
   };
+
   return <List style={{width: '100%'}} data={threads} renderItem={renderItem} keyExtractor={(item, index) => item.id.toString()} />;
 };
 
