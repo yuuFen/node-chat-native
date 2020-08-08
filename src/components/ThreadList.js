@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Avatar, Card, Text, Icon, List} from '@ui-kitten/components';
-import globalStyles from '../constants/globalStyles';
 
 const ThreadList = ({threads}) => {
   const renderItem = ({item, index}) => {
@@ -34,16 +33,12 @@ const ThreadList = ({threads}) => {
       </Card>
     );
   };
-  return <List style={{width: '100%'}} contentContainerStyle={styles.contentContainer} data={threads} renderItem={renderItem} keyExtractor={(item, index) => item.id.toString()} />;
+  return <List style={{width: '100%'}} data={threads} renderItem={renderItem} keyExtractor={(item, index) => item.id.toString()} />;
 };
 
 export default ThreadList;
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    paddingHorizontal: globalStyles.paddingHorizontal,
-    paddingVertical: globalStyles.paddingVertical,
-  },
   itemCard: {
     width: '100%',
     marginVertical: 4,

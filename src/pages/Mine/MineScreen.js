@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {Avatar, Card, Text, Button, Divider, Layout, Icon, Menu, MenuItem, TopNavigation} from '@ui-kitten/components';
 import globalStyles from '../../constants/globalStyles';
 import SimpleCard from '../../components/SimpleCard';
@@ -29,20 +29,22 @@ const MineScreen = ({navigation}) => {
   const renderUserinfoCard = () => {
     const renderItem = (num, name) => {
       return (
-        <View style={{width: '33.3%', alignItems: 'center'}}>
-          <Text status="primary" category="h6">
-            {num}
-          </Text>
-          <Text appearance="hint" category="c1">
-            {name}
-          </Text>
-        </View>
+        <TouchableOpacity style={{width: '33.3%'}}>
+          <View style={{width: '100%', alignItems: 'center'}}>
+            <Text status="primary" category="h6">
+              {num}
+            </Text>
+            <Text appearance="hint" category="c1">
+              {name}
+            </Text>
+          </View>
+        </TouchableOpacity>
       );
     };
 
     return (
       <SimpleCard style={{marginTop: 12}}>
-        <View style={styles.userinfoContainer}>
+        <TouchableOpacity style={styles.userinfoContainer}>
           <Avatar style={{margin: 8, marginRight: 12}} size="giant" source={{uri: avatar_normal}} />
           <View style={{flex: 1}}>
             <Text status="primary" category="h6" style={{paddingBottom: 6}}>
@@ -53,7 +55,7 @@ const MineScreen = ({navigation}) => {
             </Text>
           </View>
           <ForwardIcon style={{width: 20, height: 20}} fill="#8F9BB3" name="arrow-ios-forward-outline" />
-        </View>
+        </TouchableOpacity>
         <Divider />
         <View style={styles.achieveContainer}>
           {renderItem(following, '关注')}

@@ -10,7 +10,8 @@ import MoreScreen from './More/MoreScreen';
 import MessageScreen from './Message/MessageScreen';
 import MineScreen from './Mine/MineScreen';
 
-import HomeDetailsScreen from './Home/DetailsScreen';
+import HomeDetailsScreen from './Home/ThreadDetailsScreen';
+import EditThreadScreen from './Home/EditThreadScreen';
 import MessageDetailsScreen from './Message/DetailsScreen';
 import UserinfoScreen from './Mine/UserinfoScreen';
 
@@ -41,7 +42,7 @@ AppNavigator = ({user}) => {
     <NavigationContainer>
       <Stack.Navigator>
         {isFirst ? (
-        // {!user.isLogin ? (
+          // {!user.isLogin ? (
           <Stack.Screen
             name="Welcome"
             component={Welcome}
@@ -49,6 +50,7 @@ AppNavigator = ({user}) => {
               headerShown: false,
             }}
           />
+        ) : (
           // <>
           //   <Stack.Screen
           //     name="Login"
@@ -65,7 +67,6 @@ AppNavigator = ({user}) => {
           //     component={PhoneLoginScreen}
           //   />
           // </>
-        ) : (
           <>
             <Stack.Screen
               name="Main"
@@ -91,6 +92,13 @@ AppNavigator = ({user}) => {
             <Stack.Screen
               name="Userinfo"
               component={UserinfoScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="EditThread"
+              component={EditThreadScreen}
               options={{
                 headerShown: false,
               }}

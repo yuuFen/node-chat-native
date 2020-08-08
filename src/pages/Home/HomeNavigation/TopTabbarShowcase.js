@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {changeTheme} from '../../actions/globalAction';
+import {changeTheme} from '../../../actions/globalAction';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 // TODO: 动画
 import Animated from 'react-native-reanimated';
 import {Text, useTheme, TopNavigation, TopNavigationAction} from '@ui-kitten/components';
-import {MoonIcon, SunIcon} from '../../components/Icons';
+import {MoonIcon, SunIcon} from '../../../components/Icons';
 
 TopTabbarShowcase = ({state, descriptors, navigation, position, changeTheme}) => {
   const theme = useTheme();
