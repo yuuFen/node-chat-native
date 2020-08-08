@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {SafeAreaView, TouchableOpacity, TextInput, View, StyleSheet, Image, Dimensions} from 'react-native';
 import {Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, useTheme} from '@ui-kitten/components';
 
-import {CloseIcon} from '../../components/Icons';
+import {CloseIcon, PlusIcon} from '../../components/Icons';
 import {debounce} from '../../utils/utils';
 
 export default EditThreadScreen = ({navigation}) => {
@@ -31,13 +31,19 @@ export default EditThreadScreen = ({navigation}) => {
       <View style={styles.images}>
         {imgs.map((item, index) => (
           <View key={index} style={[styles.imageContainer, {width: imageContainerWidth, height: imageContainerWidth}]}>
-            <View style={styles.image}></View>
+            <View style={styles.image}>
+              <TouchableOpacity style={[styles.deleteBtn, {backgroundColor: theme['text-basic-color']}]}>
+                <CloseIcon style={{width: '100%', height: '100%'}} fill={theme['background-basic-color-1']} />
+              </TouchableOpacity>
+            </View>
           </View>
         ))}
         {imgs.length < 4 && (
-          <View style={[styles.imageContainer, {width: imageContainerWidth, height: imageContainerWidth}]}>
-            <View style={styles.image}></View>
-          </View>
+          <TouchableOpacity style={[styles.imageContainer, {width: imageContainerWidth, height: imageContainerWidth}]}>
+            <View style={[styles.image, {backgroundColor: theme['background-basic-color-3']}]}>
+              <PlusIcon style={{width: 40, height: 40}} fill={theme['color-basic-600']} />
+            </View>
+          </TouchableOpacity>
         )}
       </View>
     );
@@ -111,7 +117,20 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#525',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+    backgroundColor: '#c8a',
+  },
+  deleteBtn: {
+    position: 'absolute',
+    right: 2,
+    top: 2,
+    opacity: 0.6,
+    width: 24,
+    height: 24,
+    padding: 1,
+    borderRadius: 12,
   },
 
   bottomContainer: {

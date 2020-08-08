@@ -21,3 +21,4 @@ export const ThreadIcon = (props) => <Icon {...props} name="paper-plane-outline"
 export const ForwardIcon = (props) => <Icon {...props} name="arrow-ios-forward-outline" />;
 export const SmileIcon = (props) => <Icon {...props} name="smiling-face-outline" />;
 export const CloseIcon = (props) => <Icon {...props} name="close-outline" />;
+export const PlusIcon = (props) => <Icon {...props} name="plus-outline" />;
