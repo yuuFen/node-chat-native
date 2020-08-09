@@ -8,7 +8,6 @@ import {LikeIcon, SettingIcon, FeedBackIcon, ThreadIcon, ForwardIcon, SmileIcon}
 
 export default LoginScreen = ({navigation}) => {
   return (
-    <SafeAreaView style={{flex: 1}}>
       <Layout style={styles.container}>
         <View>
           <Text category="h1">测试</Text>
@@ -25,7 +24,6 @@ export default LoginScreen = ({navigation}) => {
           <Text>点击登录即代表同意用户协议和隐私策略</Text>
         </View>
       </Layout>
-    </SafeAreaView>
   );
 };
 

@@ -49,7 +49,7 @@ export default EditThreadScreen = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <>
       <TopNavigation title="发布动态" alignment="center" accessoryLeft={BackAction} accessoryRight={renderRightActions} />
       <Divider />
       <Layout style={styles.rootContainer}>
@@ -80,7 +80,7 @@ export default EditThreadScreen = ({navigation}) => {
           </View>
         </View>
       </Layout>
-    </SafeAreaView>
+    </>
   );
 };
 

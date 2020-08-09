@@ -46,7 +46,7 @@ const ChatScreen = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <>
       <TopNavigation
         alignment="center"
         title="Eva Application"
@@ -58,7 +58,7 @@ const ChatScreen = ({navigation}) => {
       <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Button onPress={navigateDetails}>OPEN DETAILS</Button>
       </Layout>
-    </SafeAreaView>
+    </>
   );
 };
 

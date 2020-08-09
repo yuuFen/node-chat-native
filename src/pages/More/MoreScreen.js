@@ -12,7 +12,7 @@ const More = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <>
       <TopNavigation alignment="center" title={() => <Text category="h5">发现</Text>} />
       <Divider />
       <Layout
@@ -24,7 +24,7 @@ const More = ({navigation}) => {
         }}>
         <Button onPress={navigateDetails}>OPEN DETAILS</Button>
       </Layout>
-    </SafeAreaView>
+    </>
   );
 };
 

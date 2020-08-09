@@ -98,7 +98,6 @@ const MineScreen = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
       <Layout
         // level="2"
         style={{
@@ -118,7 +117,6 @@ const MineScreen = ({navigation}) => {
         </Button>
         {renderRecordCard()}
       </Layout>
-    </SafeAreaView>
   );
 };
 

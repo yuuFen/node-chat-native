@@ -171,7 +171,7 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
   );
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <>
       <ReportMenu visible={reportVisible} setVisible={setReportVisible} />
       <TopNavigation title="动态" alignment="center" accessoryLeft={BackAction} accessoryRight={ReportAction} />
       <Divider />
@@ -180,7 +180,7 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
         {renderThread()}
         {mockDetail.replies.map((item, index) => renderReply(item, index))}
       </Layout>
-    </SafeAreaView>
+    </>
   );
 };
 

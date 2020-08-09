@@ -30,7 +30,7 @@ export default MessageScreen = ({navigation}) => {
   );
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <>
       <TopNavigation alignment="center" title={() => <Text category="h5">聊天</Text>} accessoryLeft={renderLeftAction} accessoryRight={renderRightActions} />
       <Divider />
       <Layout
@@ -56,7 +56,7 @@ export default MessageScreen = ({navigation}) => {
           </Button>
         </ButtonGroup>
       </Layout>
-    </SafeAreaView>
+    </>
   );
 };
 

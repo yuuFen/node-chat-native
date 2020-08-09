@@ -21,7 +21,7 @@ export default ({navigation}) => {
   );
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <>
       <TopNavigation
         title="详情"
         alignment="center"
@@ -31,6 +31,6 @@ export default ({navigation}) => {
       <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text category="h1">MSG DETAILS</Text>
       </Layout>
-    </SafeAreaView>
+    </>
   );
 };

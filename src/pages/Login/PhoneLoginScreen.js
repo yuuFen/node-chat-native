@@ -11,7 +11,6 @@ export default PhoneLoginScreen = ({navigation}) => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   return (
-    <SafeAreaView style={{flex: 1}}>
       <Layout style={styles.container}>
         {/* <View>
           <Text category="h3">发现更多兴趣，只做微信登录吧</Text>
@@ -26,7 +25,6 @@ export default PhoneLoginScreen = ({navigation}) => {
           登录
         </Button>
       </Layout>
-    </SafeAreaView>
   );
 };
 
