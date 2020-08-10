@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {TextInput, KeyboardAvoidingView, TouchableHighlight, View, StyleSheet, TouchableOpacity, Dimensions, Platform} from 'react-native';
-import {Divider, Avatar, Layout, Text, TopNavigation, Icon, TopNavigationAction, Button, useTheme, Input} from '@ui-kitten/components';
+import {Divider, Avatar, Layout, Text, TopNavigation, Icon, TopNavigationAction, Button, useTheme, Input, TabBar, Tab} from '@ui-kitten/components';
 import globalStyles from '../../constants/globalStyles';
 import {SettingIcon, CloseIcon, MessageIcon, MoreIcon} from '../../components/Icons';
 import ReportMenu from '../../components/ReportMenu';
@@ -103,6 +103,8 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
   //TODO 请求文章详情（内容、回复等）
   const theme = useTheme();
   const [reportVisible, setReportVisible] = useState(false);
+  // ['最新', '热门', '只看楼主']
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [replyValue, setReplyValue] = useState('');
   const ReportAction = () => <TopNavigationAction icon={MoreIcon} onPress={() => setReportVisible(true)} />;
   const BackAction = () => <TopNavigationAction icon={CloseIcon} onPress={() => navigation.goBack()} />;
@@ -116,7 +118,7 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
         <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}>
           <Avatar size="large" source={{uri: mockDetail.userinfo.avatar}} />
           <View style={{paddingHorizontal: 12}}>
-            <Text style={{paddingBottom: 4}} category="h6" status="primary">
+            <Text style={{paddingBottom: 4}} category="h6">
               {mockDetail.userinfo.username}
             </Text>
             <Text appearance="hint">{mockDetail.userinfo.grade}</Text>
@@ -192,6 +194,25 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
     </Layout>
   );
 
+  /**
+   * 渲染回复排序 Top Tabs
+   * @param {list} list ['最新', '热门', '只看楼主']
+   */
+  const renderReplyFilter = (list) => (
+    <View style={styles.replyFilterTabBarContainer}>
+      {list.map((item, index) => (
+        <TouchableOpacity key={item} onPress={() => setSelectedIndex(index)}>
+          <View style={styles.replyFilterTabContainer}>
+            <Text style={styles.replyFilterTabTitle} category="h6" status={selectedIndex === index && 'primary'}>
+              {item}
+            </Text>
+            <View style={[styles.replyFilterTabMark, selectedIndex === index && {backgroundColor: theme['color-primary-default']}]}></View>
+          </View>
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+
   return (
     <>
       <KeyboardAvoidingView behavior={Platform.OS == 'ios' && 'padding'} keyboardVerticalOffset={Platform.OS == 'ios' && 40} style={{flex: 1}}>
@@ -202,7 +223,10 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
           <View style={{flex: 1, overflow: 'hidden'}}>
             {/* 用 List 代替 */}
             {renderThread()}
-            {mockDetail.replies.map((item, index) => renderReply(item, index))}
+            <Layout style={{flex: 1, marginTop: 10}}>
+              {renderReplyFilter(['最新', '热门', '只看楼主'])}
+              {mockDetail.replies.map((item, index) => renderReply(item, index))}
+            </Layout>
           </View>
           {renderBottomMenu()}
         </Layout>
@@ -290,5 +314,24 @@ const styles = StyleSheet.create({
     height: globalStyles.bottomMenuItemHeight,
     width: globalStyles.bottomMenuItemHeight,
     paddingRight: 4,
+  },
+
+  replyFilterTabBarContainer: {
+    flexDirection: 'row',
+    paddingTop: 4,
+  },
+  replyFilterTabContainer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: 20,
+    margin: 0,
+  },
+  replyFilterTabTitle: {
+    paddingVertical: 6,
+  },
+  replyFilterTabMark: {
+    height: 2,
+    width: 20,
+    borderRadius: 2,
   },
 });
