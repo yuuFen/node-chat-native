@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, TouchableHighlight, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, SafeAreaView, TouchableHighlight, View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import {Divider, Avatar, Layout, Text, TopNavigation, Icon, TopNavigationAction, Card, Button, useTheme} from '@ui-kitten/components';
 import globalStyles from '../../constants/globalStyles';
 import {SettingIcon, CloseIcon, MessageIcon, MoreIcon} from '../../components/Icons';
@@ -14,7 +14,7 @@ const mockDetail = {
     grade: '大二',
   }, // 作者
   content: '今天天气真气真好，真开心，哈哈哈哈哈哈哈，晚安气真好，真开心，哈哈哈哈哈哈哈，晚安气真好，真开心，哈哈哈哈哈哈哈，晚安气真好，真开心，哈哈哈哈哈哈哈，晚安',
-  pictures: ['https://yuufen.com/album/photography/13.jpg'],
+  pictures: ['https://yuufen.com/album/photography/13.jpg', 'https://yuufen.com/album/photography/12.jpg', 'https://yuufen.com/album/photography/11.jpg'],
   create_before: '2小时前',
   likes: 12,
   is_like: false,
@@ -99,6 +99,23 @@ const mockDetail = {
 };
 
 export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) => {
+  const pictureSize = {};
+  [
+    () => {},
+    () => {
+      pictureSize.height = pictureSize.width = Dimensions.get('window').width - globalStyles.paddingHorizontal * 2;
+    },
+    () => {
+      pictureSize.height = pictureSize.width = (Dimensions.get('window').width - globalStyles.paddingHorizontal * 2 - 10) / 2;
+    },
+    () => {
+      pictureSize.height = pictureSize.width = (Dimensions.get('window').width - globalStyles.paddingHorizontal * 2 - 15) / 3;
+    },
+    () => {
+      pictureSize.height = pictureSize.width = (Dimensions.get('window').width - globalStyles.paddingHorizontal * 2 - 10) / 2;
+    },
+  ][mockDetail.pictures.length]();
+
   //TODO 请求文章详情（内容、回复等）
   const theme = useTheme();
   const [reportVisible, setReportVisible] = useState(false);
@@ -109,8 +126,8 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
     <Layout style={styles.threadContainer}>
       <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
         <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Avatar size="giant" source={{uri: mockDetail.userinfo.avatar}} />
-          <View style={{paddingHorizontal: 10}}>
+          <Avatar size="large" source={{uri: mockDetail.userinfo.avatar}} />
+          <View style={{paddingHorizontal: 12}}>
             <Text style={{paddingBottom: 4}} category="h6" status="primary">
               {mockDetail.userinfo.username}
             </Text>
@@ -120,11 +137,20 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
         {/* 关注 */}
       </View>
       <View>
-        <Text>{mockDetail.content}</Text>
+        <Text style={styles.threadContent}>{mockDetail.content}</Text>
         {/* pictures */}
+        <View style={styles.picturesContainer}>
+          {mockDetail.pictures.map((item, index) => {
+            return (
+              <TouchableOpacity key={index}>
+                <Image style={{...pictureSize, ...styles.picture}} source={{uri: item}} />
+              </TouchableOpacity>
+            );
+          })}
+        </View>
       </View>
       <View style={styles.threadBottomContainer}>
-        <Text>{mockDetail.create_before}</Text>
+        <Text appearance="hint">{mockDetail.create_before}</Text>
         <View style={styles.threadBottomRightContainer}>
           <View style={styles.threadBottomRightItem}>
             <Text appearance="hint">11</Text>
@@ -172,13 +198,15 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
 
   return (
     <>
-      <ReportMenu visible={reportVisible} setVisible={setReportVisible} />
-      <TopNavigation title="动态" alignment="center" accessoryLeft={BackAction} accessoryRight={ReportAction} />
-      <Divider />
-      <Layout style={{flex: 1}} level="2">
+      <Layout style={{flex: 1}}>
+        <ReportMenu visible={reportVisible} setVisible={setReportVisible} />
+        <TopNavigation title="动态" alignment="center" accessoryLeft={BackAction} accessoryRight={ReportAction} />
+        <Divider />
+        {/* <Layout style={{flex: 1}} level="2"> */}
         {/* 用 List 代替 */}
         {renderThread()}
         {mockDetail.replies.map((item, index) => renderReply(item, index))}
+        {/* </Layout> */}
       </Layout>
     </>
   );
@@ -189,11 +217,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: globalStyles.paddingHorizontal,
     paddingVertical: globalStyles.paddingVertical,
   },
+  threadContent: {
+    paddingTop: 16,
+    paddingBottom: 8,
+    lineHeight: 18,
+  },
+  picture: {
+    marginBottom: 5,
+  },
+  picturesContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
   threadBottomContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 15,
   },
   threadBottomRightContainer: {
     flexDirection: 'row',
