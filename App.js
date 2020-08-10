@@ -5,14 +5,15 @@ import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 
 import {Provider, connect} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react'; // redux 持久化
 import AppNavigator from './src/pages';
-import store from './src/store';
+import {store, persistor} from './src/store';
 
-const AppSonSon = connect((state) => ({themeOption: state.theme}))(({themeOption}) => {
+const AppSonSon = connect((state) => ({themeOption: state.global.theme}))(({themeOption}) => {
   const theme = useTheme();
   return (
     <View style={{backgroundColor: theme['background-basic-color-1'], flex: 1}}>
-      <StatusBar barStyle={themeOption.theme === 'light' ? 'dark-content' : 'light-content'} backgroundColor={theme['background-basic-color-1']} />
+      <StatusBar barStyle={themeOption === 'light' ? 'dark-content' : 'light-content'} backgroundColor={theme['background-basic-color-1']} />
       <SafeAreaView style={{flex: 1}}>
         <AppNavigator />
       </SafeAreaView>
@@ -20,11 +21,11 @@ const AppSonSon = connect((state) => ({themeOption: state.theme}))(({themeOption
   );
 });
 
-const AppSon = connect((state) => ({theme: state.theme}))(({theme}) => {
+const AppSon = connect((state) => ({theme: state.global.theme}))(({theme}) => {
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={eva[theme.theme]}>
+      <ApplicationProvider {...eva} theme={eva[theme]}>
         <AppSonSon />
       </ApplicationProvider>
     </>
@@ -33,6 +34,8 @@ const AppSon = connect((state) => ({theme: state.theme}))(({theme}) => {
 
 export default App = () => (
   <Provider store={store}>
-    <AppSon />
+    <PersistGate loading={null} persistor={persistor}>
+      <AppSon />
+    </PersistGate>
   </Provider>
 );

@@ -1,4 +1,6 @@
 import {combineReducers, createStore, applyMiddleware} from 'redux';
+import AsyncStorage from '@react-native-community/async-storage';
+import {persistStore, persistReducer} from 'redux-persist'; // redux 状态持久化
 
 import thunk from 'redux-thunk';
 // import logger from "redux-logger";
@@ -6,12 +8,18 @@ import thunk from 'redux-thunk';
 import globalReducer from './globalReducer';
 import userReducer from './userReducer';
 
-const store = createStore(
+const globalPersistConfig = {
+  key: 'global',
+  storage: AsyncStorage,
+};
+const persistedGlobalReducer = persistReducer(globalPersistConfig, globalReducer);
+
+export const store = createStore(
   combineReducers({
-    theme: globalReducer,
+    global: persistedGlobalReducer,
     user: userReducer,
   }),
-  // //applyMiddleware(logger, thunk)
+  // applyMiddleware(logger, thunk)
   applyMiddleware(thunk),
 );
-export default store;
+export const persistor = persistStore(store);

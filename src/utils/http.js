@@ -47,10 +47,10 @@ const errorHandler = (error) => {
   return response;
 };
 
-import store from '../store/index';
+import {store} from '../store/index';
 
 // 把token存在本地缓存，不要放在store，或者都放一份。token中保存设备号
-const token = store.getState().user.token;
+// const token = store.getState().user.token;
 
 let defaultReqData = {
   serviceType: '',
