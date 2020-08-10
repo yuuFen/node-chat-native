@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Image, SafeAreaView, TouchableHighlight, View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
-import {Divider, Avatar, Layout, Text, TopNavigation, Icon, TopNavigationAction, Card, Button, useTheme} from '@ui-kitten/components';
+import {TextInput, KeyboardAvoidingView, TouchableHighlight, View, StyleSheet, TouchableOpacity, Dimensions, Platform} from 'react-native';
+import {Divider, Avatar, Layout, Text, TopNavigation, Icon, TopNavigationAction, Button, useTheme, Input} from '@ui-kitten/components';
 import globalStyles from '../../constants/globalStyles';
 import {SettingIcon, CloseIcon, MessageIcon, MoreIcon} from '../../components/Icons';
 import ReportMenu from '../../components/ReportMenu';
@@ -103,9 +103,13 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
   //TODO 请求文章详情（内容、回复等）
   const theme = useTheme();
   const [reportVisible, setReportVisible] = useState(false);
+  const [replyValue, setReplyValue] = useState('');
   const ReportAction = () => <TopNavigationAction icon={MoreIcon} onPress={() => setReportVisible(true)} />;
   const BackAction = () => <TopNavigationAction icon={CloseIcon} onPress={() => navigation.goBack()} />;
 
+  /**
+   * 渲染动态正文
+   */
   const renderThread = () => (
     <Layout style={styles.threadContainer}>
       <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
@@ -127,24 +131,15 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
       </View>
       <View style={styles.threadBottomContainer}>
         <Text appearance="hint">{mockDetail.create_before}</Text>
-        <View style={styles.threadBottomRightContainer}>
-          <View style={styles.threadBottomRightItem}>
-            <Text appearance="hint">11</Text>
-            <TouchableOpacity>
-              <Icon style={{width: 25, height: 25}} fill="#8F9BB3" name={false ? 'heart' : 'heart-outline'} />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.threadBottomRightItem}>
-            <Text appearance="hint">23</Text>
-            <TouchableOpacity>
-              <Icon style={{width: 25, height: 25}} fill="#8F9BB3" name="message-circle-outline" />
-            </TouchableOpacity>
-          </View>
-        </View>
       </View>
     </Layout>
   );
 
+  /**
+   * 渲染每条回复，传入 FlatList
+   * @param item
+   * @param index
+   */
   const renderReply = (item, index) => (
     <View key={item.id} style={[styles.replyContainer, {backgroundColor: theme['background-basic-color-1'], borderColor: theme['border-basic-color-4']}]}>
       <Text numberOfLines={3} style={{lineHeight: 25}}>
@@ -172,23 +167,56 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
     </View>
   );
 
+  /**
+   * 渲染底部回复条
+   */
+  const renderBottomMenu = () => (
+    <Layout style={[styles.rootBottomContainer, {borderColor: theme['border-basic-color-3']}]}>
+      <View style={styles.rootBottomLeftContainer}>
+        <Input value={replyValue} onChangeText={(text) => setReplyValue(text)} style={{width: '100%'}} placeholder="说点什么..." />
+      </View>
+      <View style={styles.rootBottomRightContainer}>
+        <View style={styles.rootBottomRightItem}>
+          <Text appearance="hint">11</Text>
+          <TouchableOpacity>
+            <Icon style={styles.rootBottomRightItemIcon} fill={theme['color-basic-600']} name={false ? 'heart' : 'heart-outline'} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.rootBottomRightItem}>
+          <Text appearance="hint">23</Text>
+          <TouchableOpacity>
+            <Icon style={styles.rootBottomRightItemIcon} fill={theme['color-basic-600']} name="message-circle-outline" />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Layout>
+  );
+
   return (
     <>
-      <Layout style={{flex: 1}}>
+      <KeyboardAvoidingView behavior={Platform.OS == 'ios' && 'padding'} keyboardVerticalOffset={Platform.OS == 'ios' && 40} style={{flex: 1}}>
         <ReportMenu visible={reportVisible} setVisible={setReportVisible} />
         <TopNavigation title="动态" alignment="center" accessoryLeft={BackAction} accessoryRight={ReportAction} />
         <Divider />
-        {/* <Layout style={{flex: 1}} level="2"> */}
-        {/* 用 List 代替 */}
-        {renderThread()}
-        {mockDetail.replies.map((item, index) => renderReply(item, index))}
-        {/* </Layout> */}
-      </Layout>
+        <Layout style={styles.rootContainer} level="2">
+          <View style={{flex: 1, overflow: 'hidden'}}>
+            {/* 用 List 代替 */}
+            {renderThread()}
+            {mockDetail.replies.map((item, index) => renderReply(item, index))}
+          </View>
+          {renderBottomMenu()}
+        </Layout>
+      </KeyboardAvoidingView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+
   threadContainer: {
     paddingHorizontal: globalStyles.paddingHorizontal,
     paddingVertical: globalStyles.paddingVertical,
@@ -199,18 +227,8 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
   threadBottomContainer: {
+    paddingTop: 6,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  threadBottomRightContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  threadBottomRightItem: {
-    width: 60,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
     alignItems: 'center',
   },
 
@@ -238,5 +256,39 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+
+  rootBottomContainer: {
+    height: globalStyles.bottomMenuHeight,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    padding: 5,
+    paddingHorizontal: globalStyles.paddingHorizontal,
+    borderTopRightRadius: 8,
+    borderTopLeftRadius: 8,
+    borderWidth: 1,
+    borderBottomWidth: 0,
+  },
+  rootBottomLeftContainer: {
+    paddingRight: 6,
+    flexDirection: 'row',
+    flex: 1,
+  },
+  rootBottomRightContainer: {
+    width: 100,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  rootBottomRightItem: {
+    flexDirection: 'row',
+    // justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  rootBottomRightItemIcon: {
+    height: globalStyles.bottomMenuItemHeight,
+    width: globalStyles.bottomMenuItemHeight,
+    paddingRight: 4,
   },
 });

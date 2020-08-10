@@ -12,6 +12,8 @@ export default globalStyles = {
 
   // tabbar 高度（没有用到）
   tabBar: 60,
+  bottomMenuHeight: 60,
+  bottomMenuItemHeight: 32,
 
   /** color **/
   // 常用颜色

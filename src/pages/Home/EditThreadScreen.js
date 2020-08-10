@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {KeyboardAvoidingView, Platform, TouchableOpacity, TextInput, View, StyleSheet, Image, Dimensions} from 'react-native';
 import {Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, useTheme} from '@ui-kitten/components';
+import globalStyles from '../../constants/globalStyles'
 
 import {CloseIcon, PlusIcon} from '../../components/Icons';
 
 export default EditThreadScreen = ({navigation}) => {
   const theme = useTheme();
-  const [value, setValue] = useState('');
-  // const setValue = debounce(setValue1);
+  const [threadValue, setThreadValue] = useState('');
   const windowWidth = Dimensions.get('window').width;
   const imageContainerWidth = (windowWidth - globalStyles.paddingHorizontal * 2) / 4;
 
@@ -62,8 +62,8 @@ export default EditThreadScreen = ({navigation}) => {
           editable={true} //是否可编辑
           multiline={true} //多行输入
           maxLength={1000} // 最多输入 600，超出提示标红
-          value={value}
-          onChangeText={(text) => setValue(text)}
+          value={threadValue}
+          onChangeText={(text) => setThreadValue(text)}
         />
         <View>
           {renderImages([1, 2])}
@@ -86,9 +86,6 @@ export default EditThreadScreen = ({navigation}) => {
     </KeyboardAvoidingView>
   );
 };
-
-const BOTTOM_HEIGHT = 60;
-const BOTTOM_ITEM_HEIGHT = 32;
 
 const styles = StyleSheet.create({
   rootContainer: {
@@ -136,7 +133,7 @@ const styles = StyleSheet.create({
   },
 
   bottomContainer: {
-    height: BOTTOM_HEIGHT,
+    height: globalStyles.bottomMenuHeight,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -149,16 +146,16 @@ const styles = StyleSheet.create({
   },
   bottomIcon: {
     paddingHorizontal: 20,
-    height: BOTTOM_ITEM_HEIGHT,
-    width: BOTTOM_ITEM_HEIGHT,
+    height: globalStyles.bottomMenuItemHeight,
+    width: globalStyles.bottomMenuItemHeight,
   },
   bottomBtn: {
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: BOTTOM_ITEM_HEIGHT - 2,
+    height: globalStyles.bottomMenuItemHeight - 2,
     paddingHorizontal: 10,
-    borderRadius: BOTTOM_ITEM_HEIGHT / 2,
+    borderRadius: globalStyles.bottomMenuItemHeight / 2,
     marginRight: 12,
   },
 });
