@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, TouchableOpacity, TextInput, View, StyleSheet, Image, Dimensions} from 'react-native';
+import {KeyboardAvoidingView, Platform, TouchableOpacity, TextInput, View, StyleSheet, Image, Dimensions} from 'react-native';
 import {Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction, useTheme} from '@ui-kitten/components';
 
 import {CloseIcon, PlusIcon} from '../../components/Icons';
@@ -49,7 +49,9 @@ export default EditThreadScreen = ({navigation}) => {
   };
 
   return (
-    <>
+    //! android? Platform.OS == "ios" ? "padding" : "height"
+    //! why 40? 
+    <KeyboardAvoidingView behavior={Platform.OS == "ios" && "padding"} keyboardVerticalOffset={Platform.OS == "ios" && 40} style={{flex: 1}}>
       <TopNavigation title="发布动态" alignment="center" accessoryLeft={BackAction} accessoryRight={renderRightActions} />
       <Divider />
       <Layout style={styles.rootContainer}>
@@ -80,7 +82,7 @@ export default EditThreadScreen = ({navigation}) => {
           </View>
         </View>
       </Layout>
-    </>
+    </KeyboardAvoidingView>
   );
 };
 
