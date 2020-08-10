@@ -50,14 +50,15 @@ export default EditThreadScreen = ({navigation}) => {
 
   return (
     //! android? Platform.OS == "ios" ? "padding" : "height"
-    //! why 40? 
-    <KeyboardAvoidingView behavior={Platform.OS == "ios" && "padding"} keyboardVerticalOffset={Platform.OS == "ios" && 40} style={{flex: 1}}>
+    //! why 40?
+    <KeyboardAvoidingView behavior={Platform.OS == 'ios' && 'padding'} keyboardVerticalOffset={Platform.OS == 'ios' && 40} style={{flex: 1}}>
       <TopNavigation title="发布动态" alignment="center" accessoryLeft={BackAction} accessoryRight={renderRightActions} />
       <Divider />
       <Layout style={styles.rootContainer}>
         <TextInput
-          style={styles.input}
+          style={[styles.input, {color: theme['text-basic-color']}]}
           placeholder="写点好玩的吧 ლ(╹◡╹ლ )"
+          placeholderTextColor={theme['text-hint-color']}
           editable={true} //是否可编辑
           multiline={true} //多行输入
           maxLength={1000} // 最多输入 600，超出提示标红
