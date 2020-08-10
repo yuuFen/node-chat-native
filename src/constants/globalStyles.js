@@ -8,6 +8,8 @@ export default globalStyles = {
   borderRadius: 8,
   defaultCardBorderRadius: 4,
 
+  findCardsMargin: 6,
+
   // tabbar 高度（没有用到）
   tabBar: 60,
 

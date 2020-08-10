@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {SafeAreaView, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {Avatar, Card, Text, Button, Divider, Layout, Icon, Menu, MenuItem, TopNavigation} from '@ui-kitten/components';
 import globalStyles from '../../constants/globalStyles';
-import SimpleCard from '../../components/SimpleCard';
+import {CustomCard} from '../../components/CustomCard';
 import {LikeIcon, SettingIcon, FeedBackIcon, ThreadIcon, ForwardIcon, SmileIcon} from '../../components/Icons';
 
 const mockUserinfo = {
@@ -43,7 +43,7 @@ const MineScreen = ({navigation}) => {
     };
 
     return (
-      <SimpleCard style={{marginTop: 12}}>
+      <CustomCard style={{marginTop: 12}}>
         <TouchableOpacity style={styles.userinfoContainer}>
           <Avatar style={{margin: 8, marginRight: 12}} size="giant" source={{uri: avatar_normal}} />
           <View style={{flex: 1}}>
@@ -62,13 +62,13 @@ const MineScreen = ({navigation}) => {
           {renderItem(follows, '被关注')}
           {renderItem(coins, '金币')}
         </View>
-      </SimpleCard>
+      </CustomCard>
     );
   };
 
   const renderRecordCard = () => {
     return (
-      <SimpleCard style={{padding: 0, paddingVertical: 1}}>
+      <CustomCard style={{padding: 0, paddingVertical: 1}}>
         <Menu>
           <MenuItem
             style={{paddingHorizontal: 6}}
@@ -93,30 +93,30 @@ const MineScreen = ({navigation}) => {
           <MenuItem style={{paddingHorizontal: 6}} title="设置" accessoryLeft={SettingIcon} accessoryRight={ForwardIcon} />
           <MenuItem style={{paddingHorizontal: 6}} title="反馈问题" accessoryLeft={FeedBackIcon} accessoryRight={ForwardIcon} />
         </Menu>
-      </SimpleCard>
+      </CustomCard>
     );
   };
 
   return (
-      <Layout
-        // level="2"
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          paddingHorizontal: globalStyles.paddingHorizontal,
-          paddingVertical: globalStyles.paddingVertical,
-        }}>
-        {renderUserinfoCard(mockUserinfo)}
-        <Button status="danger" style={styles.authBtn} accessoryLeft={(props) => <Icon {...props} name="attach" />}>
-          {(evaProps) => (
-            <>
-              <Text {...evaProps}>你还未完成认证</Text>
-              <Text {...evaProps}>去完成</Text>
-            </>
-          )}
-        </Button>
-        {renderRecordCard()}
-      </Layout>
+    <Layout
+      // level="2"
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        paddingHorizontal: globalStyles.paddingHorizontal,
+        paddingVertical: globalStyles.paddingVertical,
+      }}>
+      {renderUserinfoCard(mockUserinfo)}
+      <Button status="danger" style={styles.authBtn} accessoryLeft={(props) => <Icon {...props} name="attach" />}>
+        {(evaProps) => (
+          <>
+            <Text {...evaProps}>你还未完成认证</Text>
+            <Text {...evaProps}>去完成</Text>
+          </>
+        )}
+      </Button>
+      {renderRecordCard()}
+    </Layout>
   );
 };
 

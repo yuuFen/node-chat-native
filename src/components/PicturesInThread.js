@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Image, Dimensions} from 'react-native';
 
-export default SimpleCard = ({pictures, home}) => {
+export default PicturesInThread = ({pictures, home}) => {
   const windowWidth = Dimensions.get('window').width;
   const pictureSize = {};
   const widthPresent = home ? 0.8 : 1;
