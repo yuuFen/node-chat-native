@@ -7,7 +7,7 @@ import globalStyles from '../../../constants/globalStyles';
 import mockThreads from '../data';
 
 export default NewThreadList = ({navigation}) => (
-  <Layout style={{height: '100%', alignItems: 'center', paddingHorizontal: globalStyles.paddingHorizontal, paddingVertical: globalStyles.paddingVertical}} level="2">
+  <Layout style={{height: '100%', alignItems: 'center'}} level="2">
     <ThreadList threads={mockThreads} navigation={navigation} />
     <ToEditThreadBtn navigation={navigation} />
   </Layout>

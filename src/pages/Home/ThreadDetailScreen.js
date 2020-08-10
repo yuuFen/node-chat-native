@@ -4,6 +4,7 @@ import {Divider, Avatar, Layout, Text, TopNavigation, Icon, TopNavigationAction,
 import globalStyles from '../../constants/globalStyles';
 import {SettingIcon, CloseIcon, MessageIcon, MoreIcon} from '../../components/Icons';
 import ReportMenu from '../../components/ReportMenu';
+import PicturesInThread from '../../components/PicturesInThread';
 
 const mockDetail = {
   id: 1001,
@@ -99,23 +100,6 @@ const mockDetail = {
 };
 
 export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) => {
-  const pictureSize = {};
-  [
-    () => {},
-    () => {
-      pictureSize.height = pictureSize.width = Dimensions.get('window').width - globalStyles.paddingHorizontal * 2;
-    },
-    () => {
-      pictureSize.height = pictureSize.width = (Dimensions.get('window').width - globalStyles.paddingHorizontal * 2 - 10) / 2;
-    },
-    () => {
-      pictureSize.height = pictureSize.width = (Dimensions.get('window').width - globalStyles.paddingHorizontal * 2 - 15) / 3;
-    },
-    () => {
-      pictureSize.height = pictureSize.width = (Dimensions.get('window').width - globalStyles.paddingHorizontal * 2 - 10) / 2;
-    },
-  ][mockDetail.pictures.length]();
-
   //TODO 请求文章详情（内容、回复等）
   const theme = useTheme();
   const [reportVisible, setReportVisible] = useState(false);
@@ -139,15 +123,7 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
       <View>
         <Text style={styles.threadContent}>{mockDetail.content}</Text>
         {/* pictures */}
-        <View style={styles.picturesContainer}>
-          {mockDetail.pictures.map((item, index) => {
-            return (
-              <TouchableOpacity key={index}>
-                <Image style={{...pictureSize, ...styles.picture}} source={{uri: item}} />
-              </TouchableOpacity>
-            );
-          })}
-        </View>
+        <PicturesInThread pictures={mockDetail.pictures} />
       </View>
       <View style={styles.threadBottomContainer}>
         <Text appearance="hint">{mockDetail.create_before}</Text>
@@ -221,14 +197,6 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 8,
     lineHeight: 18,
-  },
-  picture: {
-    marginBottom: 5,
-  },
-  picturesContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
   },
   threadBottomContainer: {
     flexDirection: 'row',
