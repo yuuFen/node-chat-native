@@ -68,7 +68,11 @@ export default MessageScreen = ({navigation}) => {
 
   const renderItem = (item, index) => (
     <View key={item.id}>
-      <TouchableOpacity style={styles.itemContainer}>
+      <TouchableOpacity
+        style={styles.itemContainer}
+        onPress={() => {
+          navigation.navigate('MessageDetail', {id: item.id, name: item.username});
+        }}>
         <Avatar style={styles.avatar} source={{uri: item.avatar}} />
         <View style={{flex: 1}}>
           <View style={styles.itemLine}>

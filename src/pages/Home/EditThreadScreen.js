@@ -52,7 +52,7 @@ export default EditThreadScreen = ({navigation}) => {
     //! android? Platform.OS == "ios" ? "padding" : "height"
     //! why 40?
     <KeyboardAvoidingView behavior={Platform.OS == 'ios' && 'padding'} keyboardVerticalOffset={Platform.OS == 'ios' && 40} style={{flex: 1}}>
-      <TopNavigation title="发布动态" alignment="center" accessoryLeft={BackAction} accessoryRight={renderRightActions} />
+      <TopNavigation title={() => <Text category="h6">发布动态</Text>} alignment="center" accessoryLeft={BackAction} accessoryRight={renderRightActions} />
       <Divider />
       <Layout style={styles.rootContainer}>
         <TextInput

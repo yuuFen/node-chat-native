@@ -217,7 +217,7 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
     <>
       <KeyboardAvoidingView behavior={Platform.OS == 'ios' && 'padding'} keyboardVerticalOffset={Platform.OS == 'ios' && 40} style={{flex: 1}}>
         <ReportMenu visible={reportVisible} setVisible={setReportVisible} />
-        <TopNavigation title="动态" alignment="center" accessoryLeft={BackAction} accessoryRight={ReportAction} />
+        <TopNavigation title={() => <Text category="h6">动态</Text>} alignment="center" accessoryLeft={BackAction} accessoryRight={ReportAction} />
         <Divider />
         <Layout style={styles.rootContainer} level="2">
           <View style={{flex: 1, overflow: 'hidden'}}>

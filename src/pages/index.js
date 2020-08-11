@@ -12,7 +12,7 @@ import MineScreen from './Mine/MineScreen';
 
 import ThreadDetailScreen from './Home/ThreadDetailScreen';
 import EditThreadScreen from './Home/EditThreadScreen';
-import MessageDetailsScreen from './Message/DetailsScreen';
+import MessageDetailScreen from './Message/MessageDetailScreen';
 import UserinfoScreen from './Mine/UserinfoScreen';
 
 import Welcome from './Welcome';
@@ -83,8 +83,8 @@ AppNavigator = ({user}) => {
               }}
             />
             <Stack.Screen
-              name="MessageDetails"
-              component={MessageDetailsScreen}
+              name="MessageDetail"
+              component={MessageDetailScreen}
               options={{
                 headerShown: false,
               }}
