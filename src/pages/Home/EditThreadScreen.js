@@ -65,6 +65,7 @@ export default EditThreadScreen = ({navigation}) => {
           value={threadValue}
           onChangeText={(text) => setThreadValue(text)}
         />
+        {/* footer */}
         <View>
           {renderImages([1, 2])}
 
