@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TextInput, KeyboardAvoidingView, TouchableHighlight, View, StyleSheet, TouchableOpacity, Dimensions, Platform} from 'react-native';
+import {ScrollView, KeyboardAvoidingView, TouchableHighlight, View, StyleSheet, TouchableOpacity, Dimensions, Platform} from 'react-native';
 import {Divider, Avatar, Layout, Text, TopNavigation, Icon, TopNavigationAction, Button, useTheme, Input, TabBar, Tab} from '@ui-kitten/components';
 import globalStyles from '../../constants/globalStyles';
 import {SettingIcon, CloseIcon, MessageIcon, MoreIcon} from '../../components/Icons';
@@ -96,6 +96,44 @@ const mockDetail = {
         },
       ],
     },
+    {
+      id: 1003,
+      userinfo: {
+        id: 1002,
+        username: '闪亮之裤',
+        avatar: 'https://cdn.v2ex.com/avatar/16be/f3f7/473250_large.png?m=1582979052',
+      },
+      content: '沙发沙发',
+      create_before: '2小时前',
+      likes: 3,
+      is_like: false,
+      replies: [
+        {
+          id: 1002,
+          userinfo: {
+            id: 1002,
+            username: '闪亮之裤',
+            avatar: 'https://cdn.v2ex.com/avatar/16be/f3f7/473250_large.png?m=1582979052',
+          },
+          content: '嗯，真香',
+          create_before: '2小时前',
+          likes: 1,
+          is_like: false,
+        },
+        {
+          id: 1003,
+          userinfo: {
+            id: 1001,
+            username: '茶几叽叽叽',
+            avatar: 'https://cdn.v2ex.com/avatar/16be/f3f7/473250_large.png?m=1582979052',
+          },
+          content: '呃呃呃',
+          create_before: '2小时前',
+          likes: 0,
+          is_like: false,
+        },
+      ],
+    },
   ],
 };
 
@@ -143,26 +181,45 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
    * @param index
    */
   const renderReply = (item, index) => (
-    <View key={item.id} style={[styles.replyContainer, {backgroundColor: theme['background-basic-color-1'], borderColor: theme['border-basic-color-4']}]}>
-      <Text numberOfLines={3} style={{lineHeight: 25}}>
-        {item.content}
-      </Text>
-      <View style={styles.itemBottom}>
-        <View style={styles.itemBottomLeft}>
-          <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Avatar size="tiny" source={{uri: item.userinfo.avatar}} />
-            <Text style={{paddingHorizontal: 10, fontWeight: 'bold'}} appearance="hint">
+    <View key={item.id} style={styles.itemContainer}>
+      <View style={styles.itemHeader}>
+        <TouchableOpacity style={styles.itemHeaderLeft}>
+          <Avatar source={{uri: item.userinfo.avatar}} />
+          <View style={{paddingLeft: 10}}>
+            <Text style={{fontWeight: 'bold'}} appearance="hint">
               {item.userinfo.username}
             </Text>
-          </TouchableOpacity>
-          <Text appearance="hint" category="c1">
-            {item.create_before}
-          </Text>
-        </View>
-        <View style={styles.itemBottomRightItem}>
+            <Text appearance="hint" category="c1">
+              {item.create_before}
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.itemHeaderRight}>
           <Text appearance="hint">{item.likes}</Text>
           <TouchableOpacity>
             <Icon style={{width: 25, height: 25}} fill="#8F9BB3" name={false ? 'heart' : 'heart-outline'} />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.itemBody}>
+        <Text>{item.content}</Text>
+        <View style={[styles.itemReply, {backgroundColor: theme['background-basic-color-2']}]}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <TouchableOpacity>
+              <Text status="info">茶几叽叽叽(楼主): </Text>
+            </TouchableOpacity>
+            <Text style={{paddingVertical: 4}}>呃呃呃</Text>
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <TouchableOpacity>
+              <Text status="info">茶几叽叽叽(楼主): </Text>
+            </TouchableOpacity>
+            <Text style={{paddingVertical: 4}}>呃呃呃</Text>
+          </View>
+          <TouchableOpacity>
+            <Text style={{paddingVertical: 4}} status="info">
+              共4条回复 &gt;
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -220,14 +277,17 @@ export default ThreadDetailScreen = ({navigation, route: {params: threadid}}) =>
         <TopNavigation title={() => <Text category="h6">动态</Text>} alignment="center" accessoryLeft={BackAction} accessoryRight={ReportAction} />
         <Divider />
         <Layout style={styles.rootContainer} level="2">
-          <View style={{flex: 1, overflow: 'hidden'}}>
-            {/* 用 List 代替 */}
-            {renderThread()}
-            <Layout style={{flex: 1, marginTop: 10}}>
-              {renderReplyFilter(['最新', '热门', '只看楼主'])}
-              {mockDetail.replies.map((item, index) => renderReply(item, index))}
-            </Layout>
-          </View>
+          {/* // TODO 用 List 代替 */}
+          <ScrollView>
+            <View style={{flex: 1, overflow: 'hidden'}}>
+              {/* 用 List 代替 */}
+              {renderThread()}
+              <Layout style={{flex: 1, marginTop: 10}}>
+                {renderReplyFilter(['最新', '热门', '只看楼主'])}
+                {mockDetail.replies.map((item, index) => renderReply(item, index))}
+              </Layout>
+            </View>
+          </ScrollView>
           {renderBottomMenu()}
         </Layout>
       </KeyboardAvoidingView>
@@ -256,30 +316,39 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  replyContainer: {
+  itemContainer: {
     marginHorizontal: globalStyles.paddingHorizontal,
-    marginTop: 15,
-    borderRadius: globalStyles.defaultCardBorderRadius,
-    borderWidth: 1,
     paddingHorizontal: 12,
-    paddingVertical: 12,
+    paddingTop: 6,
+    paddingBottom: 18,
   },
 
-  itemBottom: {
+  itemHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 15,
   },
-  itemBottomLeft: {
+  itemHeaderLeft: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  itemBottomRightItem: {
+  itemHeaderRight: {
     width: 60,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  itemBody: {
+    paddingLeft: 30,
+    paddingTop: 12,
+    width: '100%',
+  },
+  itemReply: {
+    width: '100%',
+    borderRadius: 8,
+    marginTop: 12,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
   },
 
   rootBottomContainer: {
@@ -319,6 +388,7 @@ const styles = StyleSheet.create({
   replyFilterTabBarContainer: {
     flexDirection: 'row',
     paddingTop: 4,
+    marginBottom: 12,
   },
   replyFilterTabContainer: {
     justifyContent: 'space-between',
