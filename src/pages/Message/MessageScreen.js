@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     paddingLeft: 12,
+    paddingVertical: 4,
   },
   itemCount: {
     color: '#fff',
@@ -155,6 +156,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     height: 16,
     borderRadius: 8,
+    overflow: 'hidden',
     paddingHorizontal: 6,
   },
 });
