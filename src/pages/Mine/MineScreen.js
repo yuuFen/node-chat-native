@@ -73,16 +73,18 @@ const MineScreen = ({navigation}) => {
           <MenuItem
             style={{paddingHorizontal: 6}}
             title="我的喜欢"
+            onPress={() => navigation.navigate('Liking')}
             accessoryLeft={LikeIcon}
             accessoryRight={() => (
               <Text style={{fontWeight: 'bold', paddingHorizontal: 12}} status="primary">
                 {liking}
               </Text>
             )}
-          />
+            />
           <MenuItem
             style={{paddingHorizontal: 6}}
             title="我的主题"
+            onPress={() => navigation.navigate('MyThreads')}
             accessoryLeft={ThreadIcon}
             accessoryRight={() => (
               <Text style={{fontWeight: 'bold', paddingHorizontal: 12}} status="primary">
@@ -90,7 +92,7 @@ const MineScreen = ({navigation}) => {
               </Text>
             )}
           />
-          <MenuItem style={{paddingHorizontal: 6}} title="设置" accessoryLeft={SettingIcon} accessoryRight={ForwardIcon} />
+          <MenuItem onPress={() => navigation.navigate('Setting')} style={{paddingHorizontal: 6}} title="设置" accessoryLeft={SettingIcon} accessoryRight={ForwardIcon} />
           <MenuItem style={{paddingHorizontal: 6}} title="反馈问题" accessoryLeft={FeedBackIcon} accessoryRight={ForwardIcon} />
         </Menu>
       </CustomCard>
